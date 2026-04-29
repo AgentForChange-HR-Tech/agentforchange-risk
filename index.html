@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Risk & Compliance — The Signal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0b0c0f;
+    --bg-2:      #111318;
+    --bg-3:      #181a20;
+    --ink:       #eeedf0;
+    --ink-mid:   #b0b2bc;
+    --ink-soft:  #70727e;
+    --ink-faint: #3a3c46;
+    --signal:    #e8c84a;
+    --signal-dim:#a88d2e;
+    --signal-bg: rgba(232,200,74,0.07);
+    --accent:    #e8715a;
+    --accent-dim:#a84f3e;
+    --accent-bg: rgba(232,113,90,0.08);
+    --teal:      #4ecdc4;
+    --violet:    #a78bfa;
+    --green:     #6ee7b7;
+    --blue:      #60a5fa;
+    --border:    rgba(238,237,240,0.08);
+    --border-md: rgba(238,237,240,0.14);
+    --radius:    12px;
+    --radius-sm: 7px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'IBM Plex Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+
+  .bg-glow { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+  .glow-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.1; animation: drift 20s ease-in-out infinite alternate; }
+  .glow-1 { width: 500px; height: 500px; background: var(--accent); top: -150px; right: -100px; animation-delay: 0s; }
+  .glow-2 { width: 350px; height: 350px; background: var(--signal); bottom: -100px; left: -80px; animation-delay: -8s; }
+  .glow-3 { width: 280px; height: 280px; background: var(--violet); top: 45%; right: 15%; animation-delay: -15s; }
+
+  @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,25px) scale(1.07); } }
+
+  .site-wrap { position: relative; z-index: 1; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(11,12,15,0.88);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+  }
+
+  .nav-inner {
+    max-width: 1140px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 56px; gap: 1rem;
+  }
+
+  .nav-back {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; color: var(--ink-soft);
+    text-decoration: none; display: flex; align-items: center; gap: 6px;
+    transition: color 0.15s;
+  }
+  .nav-back:hover { color: var(--signal); }
+
+  .nav-logo {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px; font-weight: 500; color: var(--signal);
+    letter-spacing: 0.04em; text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .nav-logo::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--signal); animation: blink 2.4s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  .nav-domain {
+    font-size: 12px; padding: 4px 10px; border-radius: 12px;
+    background: var(--accent-bg); color: var(--accent);
+    border: 1px solid var(--accent-dim); font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .nav-right { display: flex; align-items: center; gap: 10px; }
+
+  .nav-links { display: flex; gap: 4px; }
+  .nav-link { font-size: 13px; color: var(--ink-soft); text-decoration: none; padding: 5px 10px; border-radius: var(--radius-sm); transition: all 0.15s; }
+  .nav-link:hover { color: var(--ink); background: rgba(238,237,240,0.05); }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    padding: 5rem 2rem 3rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(232,113,90,0.04) 0%, transparent 100%);
+  }
+
+  .page-hero-inner { max-width: 1140px; margin: 0 auto; }
+
+  .hero-breadcrumb {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--ink-faint);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 1.25rem; display: flex; align-items: center; gap: 8px;
+  }
+
+  .hero-breadcrumb a { color: var(--signal); text-decoration: none; }
+  .hero-breadcrumb a:hover { text-decoration: underline; }
+
+  .page-hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 600; line-height: 1.05;
+    color: var(--ink); letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero h1 em { font-style: italic; color: var(--accent); }
+
+  .page-hero-desc {
+    font-size: 16px; color: var(--ink-soft); line-height: 1.75;
+    max-width: 680px; margin-bottom: 2rem;
+  }
+
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+  .meta-chip {
+    font-size: 11px; padding: 4px 10px; border-radius: 12px;
+    border: 1px solid var(--border-md); color: var(--ink-soft);
+    font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.04em;
+  }
+
+  .meta-chip.hot { background: var(--accent-bg); color: var(--accent); border-color: var(--accent-dim); }
+
+  /* ── URGENCY BANNER ── */
+  .urgency-banner {
+    background: var(--bg-2);
+    border-bottom: 1px solid var(--border);
+    padding: 0.85rem 2rem;
+  }
+
+  .urgency-inner {
+    max-width: 1140px; margin: 0 auto;
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  }
+
+  .urgency-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; font-weight: 500; color: var(--accent);
+    letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap;
+    padding: 3px 8px; border-radius: 6px;
+    background: var(--accent-bg); border: 1px solid var(--accent-dim);
+  }
+
+  .urgency-items { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+
+  .urgency-item {
+    font-size: 12px; color: var(--ink-mid);
+    display: flex; align-items: center; gap: 6px;
+  }
+
+  .urgency-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; animation: blink 2s infinite; }
+
+  /* ── MAIN ── */
+  .main { max-width: 1140px; margin: 0 auto; padding: 2rem; }
+
+  /* ── STAT STRIP ── */
+  .stat-strip {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px; background: var(--border);
+    border: 1px solid var(--border); border-radius: var(--radius);
+    overflow: hidden; margin-bottom: 2rem;
+  }
+
+  .stat-item { background: var(--bg-2); padding: 1.25rem 1.5rem; }
+  .stat-val { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--accent); line-height: 1; }
+  .stat-label { font-size: 11px; color: var(--ink-soft); margin-top: 5px; line-height: 1.4; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; gap: 4px; margin-bottom: 1.5rem;
+    background: var(--bg-2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 5px;
+    flex-wrap: wrap;
+  }
+
+  .tab-btn {
+    padding: 7px 16px; border-radius: var(--radius-sm); border: none;
+    background: transparent; font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 13px; font-weight: 400; color: var(--ink-soft);
+    cursor: pointer; transition: all 0.15s; white-space: nowrap;
+  }
+
+  .tab-btn:hover { background: rgba(238,237,240,0.05); color: var(--ink); }
+  .tab-btn.active { background: var(--accent); color: #0b0c0f; font-weight: 500; }
+
+  .section { display: none; }
+  .section.active { display: block; }
+
+  /* ── GRIDS ── */
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 16px; }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--bg-2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem 1.5rem;
+  }
+
+  .card-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; font-weight: 500; color: var(--ink-faint);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 1rem; padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* ── SOURCE ROWS ── */
+  .source-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .source-row:last-child { border-bottom: none; }
+
+  .source-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+  .source-info { flex: 1; min-width: 0; }
+  .source-name { font-size: 13px; font-weight: 500; color: var(--ink); }
+  .source-desc { font-size: 12px; color: var(--ink-soft); margin-top: 1px; }
+
+  .source-name a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; transition: all 0.12s; }
+  .source-name a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
+  .freq-badge { font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
+  .freq-daily { background: rgba(78,205,196,0.1); color: var(--teal); }
+  .freq-weekly { background: rgba(96,165,250,0.1); color: var(--blue); }
+  .freq-monthly { background: rgba(232,200,74,0.1); color: var(--signal); }
+  .freq-breaking { background: var(--accent-bg); color: var(--accent); }
+
+  /* ── PILL ── */
+  .pill {
+    font-size: 12px; padding: 5px 12px; border-radius: 20px;
+    border: 1px solid var(--border-md); color: var(--ink-mid);
+    cursor: pointer; transition: all 0.15s; text-decoration: none; display: inline-block;
+  }
+  .pill:hover { background: var(--accent-bg); color: var(--accent); border-color: var(--accent-dim); }
+
+  /* ── REGULATION CARDS ── */
+  .reg-card {
+    background: var(--bg-2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem 1.5rem;
+    border-left: 3px solid var(--reg-color, var(--accent));
+    margin-bottom: 12px;
+  }
+
+  .reg-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .reg-name { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.3; }
+  .reg-status {
+    font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 8px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .status-live { background: rgba(110,231,183,0.1); color: var(--green); }
+  .status-imminent { background: var(--accent-bg); color: var(--accent); }
+  .status-upcoming { background: rgba(232,200,74,0.1); color: var(--signal); }
+  .status-proposed { background: rgba(167,139,250,0.1); color: var(--violet); }
+
+  .reg-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 10px; }
+
+  .reg-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .reg-tag { font-size: 10px; padding: 2px 7px; border-radius: 7px; background: rgba(238,237,240,0.04); color: var(--ink-soft); border: 1px solid var(--border); }
+
+  /* ── RHYTHM ROWS ── */
+  .rhythm-row { display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .rhythm-row:last-child { border-bottom: none; }
+  .rhythm-when { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.05em; min-width: 80px; padding-top: 2px; flex-shrink: 0; }
+  .rhythm-what { font-size: 13px; color: var(--ink); line-height: 1.5; }
+  .rhythm-src { font-size: 11px; color: var(--ink-faint); margin-top: 3px; }
+
+  /* ── BRIEF LINKS ── */
+  .brief-link { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: all 0.12s; }
+  .brief-link:last-child { border-bottom: none; }
+  .brief-link:hover .brief-text { color: var(--accent); }
+  .brief-text { font-size: 13px; color: var(--ink); flex: 1; line-height: 1.4; transition: color 0.12s; }
+  .brief-arrow { font-size: 13px; color: var(--ink-faint); }
+
+  /* ── CHECKLIST ── */
+  .checklist-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .checklist-item:last-child { border-bottom: none; }
+  .check-box { width: 18px; height: 18px; border-radius: 4px; border: 1px solid var(--border-md); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; }
+  .check-priority { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 6px; flex-shrink: 0; margin-top: 2px; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; }
+  .p-critical { background: var(--accent-bg); color: var(--accent); }
+  .p-high { background: rgba(232,200,74,0.1); color: var(--signal); }
+  .p-medium { background: rgba(96,165,250,0.1); color: var(--blue); }
+  .check-content { flex: 1; }
+  .check-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+  .check-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+
+  /* ── LIVE FEED ── */
+  .live-feed-panel { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 16px; }
+  .feed-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
+  .feed-title { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; }
+  .live-dot { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--accent); font-weight: 500; font-family: 'IBM Plex Mono', monospace; }
+  .live-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: blink 2s infinite; }
+  .feed-tabs { display: flex; gap: 4px; margin-bottom: 1rem; flex-wrap: wrap; }
+  .feed-tab { font-size: 11px; padding: 4px 10px; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--ink-soft); cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; transition: all 0.12s; }
+  .feed-tab.active { background: var(--accent); color: #0b0c0f; border-color: var(--accent); font-weight: 500; }
+  .feed-tab:hover:not(.active) { background: rgba(238,237,240,0.05); color: var(--ink); }
+  .feed-list { min-height: 180px; }
+  .feed-item { display: flex; flex-direction: column; gap: 3px; padding: 10px 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: all 0.12s; }
+  .feed-item:last-child { border-bottom: none; }
+  .feed-item:hover .feed-item-title { color: var(--accent); }
+  .feed-item-source { font-size: 10px; font-weight: 500; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; font-family: 'IBM Plex Mono', monospace; }
+  .feed-item-title { font-size: 13px; color: var(--ink); line-height: 1.4; transition: color 0.12s; }
+  .feed-item-date { font-size: 11px; color: var(--ink-faint); }
+  .feed-loading { display: flex; align-items: center; justify-content: center; height: 100px; font-size: 13px; color: var(--ink-faint); }
+  .feed-error { font-size: 12px; color: var(--ink-faint); padding: 12px 0; text-align: center; }
+  .feed-footer-note { margin-top: 10px; font-size: 11px; color: var(--ink-faint); font-family: 'IBM Plex Mono', monospace; }
+
+  /* ── SEARCH ── */
+  .search-wrap { margin-bottom: 1.5rem; position: relative; }
+  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--ink-faint); font-size: 13px; pointer-events: none; }
+  #search-input {
+    width: 100%; padding: 9px 12px 9px 34px;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--bg-2); color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif; font-size: 13px;
+    outline: none; transition: border-color 0.15s;
+  }
+  #search-input:focus { border-color: var(--accent); }
+  #search-input::placeholder { color: var(--ink-faint); }
+  .search-results { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: var(--bg-3); border: 1px solid var(--border-md); border-radius: var(--radius); z-index: 200; display: none; max-height: 300px; overflow-y: auto; }
+  .search-results.visible { display: block; }
+  .sr-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--border); cursor: pointer; text-decoration: none; transition: background 0.1s; }
+  .sr-item:last-child { border-bottom: none; }
+  .sr-item:hover { background: rgba(238,237,240,0.04); }
+  .sr-type { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 6px; background: var(--accent-bg); color: var(--accent); white-space: nowrap; flex-shrink: 0; margin-top: 2px; font-family: 'IBM Plex Mono', monospace; }
+  .sr-title { font-size: 13px; color: var(--ink); line-height: 1.4; }
+  .sr-desc { font-size: 11px; color: var(--ink-faint); margin-top: 1px; }
+  .search-empty { padding: 14px; font-size: 13px; color: var(--ink-faint); text-align: center; }
+
+  /* ── SHARE BTN ── */
+  .hdr-btn { display: flex; align-items: center; gap: 5px; font-size: 12px; padding: 5px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-md); background: transparent; color: var(--ink-soft); cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; transition: all 0.12s; white-space: nowrap; text-decoration: none; }
+  .hdr-btn:hover { color: var(--ink); background: rgba(238,237,240,0.05); }
+  .hdr-btn.copied { background: var(--accent-bg); color: var(--accent); border-color: var(--accent-dim); }
+
+  /* ── FOOTER ── */
+  footer { border-top: 1px solid var(--border); background: var(--bg-2); padding: 2rem; margin-top: 3rem; }
+  .footer-inner { max-width: 1140px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+  .footer-left { font-size: 12px; color: var(--ink-faint); font-family: 'IBM Plex Mono', monospace; }
+  .footer-right { display: flex; gap: 12px; flex-wrap: wrap; }
+  .footer-link { font-size: 12px; color: var(--ink-soft); text-decoration: none; transition: color 0.12s; }
+  .footer-link:hover { color: var(--signal); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .urgency-items { gap: 0.75rem; }
+  }
+  @media (max-width: 640px) {
+    .main { padding: 1rem; }
+    .page-hero { padding: 3rem 1.25rem 2rem; }
+    .tab-btn { font-size: 12px; padding: 6px 10px; }
+    .stat-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-glow">
+  <div class="glow-orb glow-1"></div>
+  <div class="glow-orb glow-2"></div>
+  <div class="glow-orb glow-3"></div>
+</div>
+
+<div class="site-wrap">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <a href="https://agentforchange-hr-tech.github.io/the-signal" class="nav-back">← The Signal</a>
+      <a href="#" class="nav-logo">THE SIGNAL</a>
+      <span class="nav-domain">Risk & Compliance</span>
+    </div>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#regulations" class="nav-link">Regulations</a>
+        <a href="#sources" class="nav-link">Sources</a>
+        <a href="#checklist" class="nav-link">Checklist</a>
+      </div>
+      <button class="hdr-btn" id="share-btn" onclick="copyLink()">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="13" cy="2.5" r="1.5"/><circle cx="13" cy="13.5" r="1.5"/><circle cx="3" cy="8" r="1.5"/><line x1="4.4" y1="7.2" x2="11.6" y2="3.3"/><line x1="4.4" y1="8.8" x2="11.6" y2="12.7"/></svg>
+        Share
+      </button>
+      <button class="hdr-btn" onclick="window.print()">Print</button>
+      <button class="hdr-btn" id="dark-toggle" onclick="toggleDark()">Light</button>
+    </div>
+  </div>
+</nav>
+
+<!-- URGENCY BANNER -->
+<div class="urgency-banner">
+  <div class="urgency-inner">
+    <span class="urgency-label">Active Now</span>
+    <div class="urgency-items">
+      <span class="urgency-item"><span class="urgency-dot"></span>Colorado AI Act — compliance deadline Jun 30, 2026</span>
+      <span class="urgency-item"><span class="urgency-dot"></span>EU AI Act high-risk systems — Aug 2, 2026</span>
+      <span class="urgency-item"><span class="urgency-dot"></span>Illinois HB 3773 — in effect Jan 1, 2026</span>
+      <span class="urgency-item"><span class="urgency-dot"></span>California ADS regulations — in effect Oct 1, 2025</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="hero-breadcrumb">
+      <a href="https://agentforchange-hr-tech.github.io/the-signal">The Signal</a>
+      <span>›</span>
+      <span>Risk & Compliance</span>
+    </div>
+    <h1>AI Regulation &<br><em>Legal Exposure</em></h1>
+    <p class="page-hero-desc">
+      The legal landscape governing AI in HR is evolving faster than most compliance teams can track. From the EU AI Act to a patchwork of US state laws, employers face a complex, overlapping set of obligations around bias audits, transparency, human oversight, and data governance — with enforcement already underway.
+    </p>
+    <div class="hero-meta">
+      <span class="meta-chip hot">🔴 High Urgency</span>
+      <span class="meta-chip">Updated <span id="hero-date"></span></span>
+      <span class="meta-chip">12 Sources tracked</span>
+      <span class="meta-chip">5 Active regulations</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- STAT STRIP -->
+  <div class="stat-strip" style="margin-top:1.5rem;">
+    <div class="stat-item">
+      <div class="stat-val">5</div>
+      <div class="stat-label">Active or imminent AI hiring laws</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">€35M</div>
+      <div class="stat-label">Max EU AI Act fine (or 7% global revenue)</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">76%</div>
+      <div class="stat-label">Enterprises using AI in HR without formal compliance prep</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">87%</div>
+      <div class="stat-label">Companies using AI somewhere in recruiting</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">4yr</div>
+      <div class="stat-label">California data retention requirement for ADS records</div>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="search-input" placeholder="Search regulations, sources, frameworks, compliance topics…" oninput="runSearch(this.value)" onblur="setTimeout(()=>closeSearch(),200)">
+    <div class="search-results" id="search-results"></div>
+  </div>
+
+  <!-- TAB BAR -->
+  <div class="tab-bar">
+    <button class="tab-btn active" onclick="showTab('regulations', this)">Regulation Tracker</button>
+    <button class="tab-btn" onclick="showTab('sources', this)">Sources & Feeds</button>
+    <button class="tab-btn" onclick="showTab('checklist', this)">Compliance Checklist</button>
+    <button class="tab-btn" onclick="showTab('rhythm', this)">Monitoring Rhythm</button>
+    <button class="tab-btn" onclick="showTab('leaders', this)">Key Voices</button>
+  </div>
+
+  <!-- TAB: REGULATIONS -->
+  <div id="regulations" class="section active">
+    <div style="margin-bottom:1rem;">
+      <p style="font-size:13px; color:var(--ink-soft); line-height:1.7;">The regulatory landscape as of <span id="reg-date"></span>. This tracker covers US federal, US state, and EU regulations directly impacting how employers design, deploy, and govern AI in HR and recruiting systems. <em style="color:var(--accent);">This does not constitute legal advice — consult qualified employment counsel for your specific situation.</em></p>
+    </div>
+
+    <!-- US STATE LAWS -->
+    <div class="card-title" style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; margin-bottom:1rem;">US State Laws</div>
+
+    <div class="reg-card" style="--reg-color:#e8715a;">
+      <div class="reg-header">
+        <div class="reg-name">California Civil Rights Council — ADS Regulations</div>
+        <span class="reg-status status-live">● Live</span>
+      </div>
+      <p class="reg-desc">Effective October 1, 2025. Extends California's anti-discrimination laws to automated decision systems (ADS) in employment. Requires meaningful human oversight with override capability, proactive bias testing, 4-year data retention, and vendor liability under agency principles.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Effective Oct 2025</span>
+        <span class="reg-tag">Bias testing required</span>
+        <span class="reg-tag">4yr data retention</span>
+        <span class="reg-tag">Vendor liability</span>
+        <span class="reg-tag">Human oversight</span>
+      </div>
+    </div>
+
+    <div class="reg-card" style="--reg-color:#e8715a;">
+      <div class="reg-header">
+        <div class="reg-name">Illinois HB 3773 — AI in Employment Decisions</div>
+        <span class="reg-status status-live">● Live</span>
+      </div>
+      <p class="reg-desc">Effective January 1, 2026. Amends the Illinois Human Rights Act to prohibit discriminatory AI use in hiring, promotion, discipline, and termination. Requires advance notice to applicants when AI influences covered employment decisions. Employers remain responsible for AI outcomes even from third-party vendors.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Effective Jan 2026</span>
+        <span class="reg-tag">Notice required</span>
+        <span class="reg-tag">Anti-discrimination</span>
+        <span class="reg-tag">Vendor accountability</span>
+      </div>
+    </div>
+
+    <div class="reg-card" style="--reg-color:#fb923c;">
+      <div class="reg-header">
+        <div class="reg-name">Colorado AI Act (SB 24-205)</div>
+        <span class="reg-status status-imminent">⚡ Jun 30, 2026</span>
+      </div>
+      <p class="reg-desc">One of the most comprehensive US state AI laws. Regulates "high-risk" AI in employment decisions — hiring, firing, promotion. Requires annual impact assessments, transparency when AI is used, and foreseeable risk disclosures. Currently subject to federal legal challenge by DOJ and xAI, but compliance preparation is advised regardless. Violations constitute unfair trade practice.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Deadline Jun 30, 2026</span>
+        <span class="reg-tag">Annual impact assessment</span>
+        <span class="reg-tag">High-risk classification</span>
+        <span class="reg-tag">Under legal challenge</span>
+        <span class="reg-tag">Unfair trade practice</span>
+      </div>
+    </div>
+
+    <div class="reg-card" style="--reg-color:#e8c84a;">
+      <div class="reg-header">
+        <div class="reg-name">Texas TRAIGA — Responsible AI Governance Act</div>
+        <span class="reg-status status-live">● Live</span>
+      </div>
+      <p class="reg-desc">Effective January 1, 2026. Requires developers and deployers of high-risk AI to use reasonable care to prevent algorithmic discrimination. Establishes a framework targeting discriminatory outcomes in employment, credit, and housing decisions.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Effective Jan 2026</span>
+        <span class="reg-tag">Anti-discrimination</span>
+        <span class="reg-tag">Developer & deployer liability</span>
+      </div>
+    </div>
+
+    <div class="reg-card" style="--reg-color:#a78bfa;">
+      <div class="reg-header">
+        <div class="reg-name">NYC Local Law 144 — Automated Employment Decision Tools</div>
+        <span class="reg-status status-live">● Live</span>
+      </div>
+      <p class="reg-desc">Requires independent annual bias audits before using automated employment decision tools to screen NYC candidates or employees. Employers must provide advance notice and disclose job qualifications the tool evaluates. Applies to tools that substantially assist or replace discretionary hiring decisions.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Annual bias audit</span>
+        <span class="reg-tag">Candidate notice</span>
+        <span class="reg-tag">NYC employers</span>
+        <span class="reg-tag">Third-party audit</span>
+      </div>
+    </div>
+
+    <!-- EU -->
+    <div class="card-title" style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; margin:1.5rem 0 1rem;">EU & Global</div>
+
+    <div class="reg-card" style="--reg-color:#60a5fa;">
+      <div class="reg-header">
+        <div class="reg-name">EU AI Act — High-Risk HR Systems</div>
+        <span class="reg-status status-imminent">⚡ Aug 2, 2026</span>
+      </div>
+      <p class="reg-desc">The world's first comprehensive AI regulation. AI used in recruitment, screening, selection, performance evaluation, or promotion is explicitly classified as high-risk under Annex III. Full compliance required by August 2, 2026. Extraterritorial reach — applies to any employer whose AI outputs affect EU candidates or employees, regardless of HQ location. Penalties up to €35M or 7% of global turnover.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Deadline Aug 2, 2026</span>
+        <span class="reg-tag">Extraterritorial reach</span>
+        <span class="reg-tag">Human oversight required</span>
+        <span class="reg-tag">Bias testing mandatory</span>
+        <span class="reg-tag">€35M max fine</span>
+        <span class="reg-tag">Worker notice required</span>
+      </div>
+    </div>
+
+    <div class="reg-card" style="--reg-color:#6ee7b7;">
+      <div class="reg-header">
+        <div class="reg-name">EU AI Act — Prohibited Practices (in effect)</div>
+        <span class="reg-status status-live">● Live Feb 2025</span>
+      </div>
+      <p class="reg-desc">Banned practices took effect February 2, 2025. Emotion recognition in the workplace is absolutely prohibited. Biometric categorization based on sensitive traits is banned. AI literacy obligations now require employers to train staff involved in AI operations on how AI works and governance responsibilities.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Emotion recognition banned</span>
+        <span class="reg-tag">Biometric categorization banned</span>
+        <span class="reg-tag">AI literacy required</span>
+        <span class="reg-tag">In effect now</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: SOURCES -->
+  <div id="sources" class="section">
+    <div class="grid-2">
+
+      <div class="card">
+        <div class="card-title">Legal & regulatory intelligence — daily/weekly</div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(232,113,90,0.1);">⚖️</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.shrm.org/topics-tools/topics/employment-law-compliance" target="_blank">SHRM — Employment Law & Compliance</a></div>
+            <div class="source-desc">HR-focused legal updates, AI law summaries, compliance guidance</div>
+          </div>
+          <span class="freq-badge freq-daily">Daily</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(96,165,250,0.1);">📰</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.hrdive.com/topic/employment-law/" target="_blank">HR Dive — Employment Law</a></div>
+            <div class="source-desc">Breaking state and federal AI hiring law coverage</div>
+          </div>
+          <span class="freq-badge freq-daily">Daily</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(167,139,250,0.1);">🏛️</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.littler.com/publication-press/publication/workplace-policy-institute-insider" target="_blank">Littler — Workplace Policy Insider</a></div>
+            <div class="source-desc">Top employment law firm — AI regulation analysis and guidance</div>
+          </div>
+          <span class="freq-badge freq-weekly">Weekly</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(110,231,183,0.1);">📋</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://ogletree.com/insights-resources/blog-posts/" target="_blank">Ogletree Deakins Blog</a></div>
+            <div class="source-desc">Employment law firm — deep AI hiring compliance briefs</div>
+          </div>
+          <span class="freq-badge freq-weekly">Weekly</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(232,200,74,0.1);">🌐</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.hrmorning.com/articles/category/compliance/" target="_blank">HR Morning — Compliance</a></div>
+            <div class="source-desc">Practical compliance news for HR practitioners</div>
+          </div>
+          <span class="freq-badge freq-daily">Daily</span>
+        </div>
+        <div style="margin-top:1rem;">
+          <a href="https://www.shrm.org/topics-tools/topics/employment-law-compliance" target="_blank" class="pill">SHRM Compliance →</a>
+          <a href="https://www.hrdive.com/topic/employment-law/" target="_blank" class="pill" style="margin-top:6px;">HR Dive Law →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">EU & international AI regulation</div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(96,165,250,0.1);">🇪🇺</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://artificialintelligenceact.eu" target="_blank">EU AI Act Tracker</a></div>
+            <div class="source-desc">The definitive independent tracker for EU AI Act developments and timelines</div>
+          </div>
+          <span class="freq-badge freq-breaking">Breaking</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(167,139,250,0.1);">📜</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://iapp.org/news/topic/artificial-intelligence/" target="_blank">IAPP — AI Policy & Privacy</a></div>
+            <div class="source-desc">International Association of Privacy Professionals — GDPR + AI Act intersection</div>
+          </div>
+          <span class="freq-badge freq-weekly">Weekly</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(232,113,90,0.1);">🔍</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.fieldfisher.com/en/insights?topic=employment" target="_blank">Fieldfisher Employment Law</a></div>
+            <div class="source-desc">EU employment law firm — AI Act HR compliance analysis</div>
+          </div>
+          <span class="freq-badge freq-weekly">Weekly</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(110,231,183,0.1);">⚙️</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.nist.gov/artificial-intelligence" target="_blank">NIST AI Risk Management Framework</a></div>
+            <div class="source-desc">US federal AI governance framework — Map, Measure, Manage, Govern</div>
+          </div>
+          <span class="freq-badge freq-monthly">Quarterly</span>
+        </div>
+        <div style="margin-top:1rem;">
+          <a href="https://artificialintelligenceact.eu" target="_blank" class="pill">EU AI Act Tracker →</a>
+          <a href="https://iapp.org/news/topic/artificial-intelligence/" target="_blank" class="pill" style="margin-top:6px;">IAPP AI Policy →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Federal & EEOC watch</div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(232,200,74,0.1);">🏛️</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.eeoc.gov/artificial-intelligence" target="_blank">EEOC — AI in Employment</a></div>
+            <div class="source-desc">Federal guidance on AI and employment discrimination — monitor for policy changes under current administration</div>
+          </div>
+          <span class="freq-badge freq-breaking">Monitor</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(96,165,250,0.1);">📊</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.dol.gov/agencies/eta/ai" target="_blank">DOL — AI & Workforce</a></div>
+            <div class="source-desc">Department of Labor guidance on AI in workplace and hiring</div>
+          </div>
+          <span class="freq-badge freq-monthly">Quarterly</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(232,113,90,0.1);">⚡</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.hklaw.com/en/insights/publications?category=artificial-intelligence" target="_blank">Holland & Knight — AI Employment Law</a></div>
+            <div class="source-desc">Federal-state AI law divergence analysis — regularly updated</div>
+          </div>
+          <span class="freq-badge freq-weekly">Weekly</span>
+        </div>
+        <div style="margin-top:1rem;">
+          <a href="https://www.eeoc.gov/artificial-intelligence" target="_blank" class="pill">EEOC AI Page →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Analyst & research firms</div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(167,139,250,0.1);">🔬</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.gartner.com/en/legal-compliance" target="_blank">Gartner Legal & Compliance</a></div>
+            <div class="source-desc">AI governance frameworks, compliance maturity models</div>
+          </div>
+          <span class="freq-badge freq-monthly">Quarterly</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(96,165,250,0.1);">📈</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.forrester.com/research/ai-governance/" target="_blank">Forrester — AI Governance</a></div>
+            <div class="source-desc">Enterprise AI risk and governance framework research</div>
+          </div>
+          <span class="freq-badge freq-monthly">Quarterly</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(110,231,183,0.1);">📰</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.hrdefenseblog.com" target="_blank">HR Defense Blog</a></div>
+            <div class="source-desc">Employment law blog focused on AI hiring compliance — highly practical</div>
+          </div>
+          <span class="freq-badge freq-weekly">Weekly</span>
+        </div>
+        <div style="margin-top:1rem;">
+          <a href="https://www.hrdefenseblog.com" target="_blank" class="pill">HR Defense Blog →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- LIVE RSS FEED -->
+    <div class="live-feed-panel" id="rss-panel">
+      <div class="feed-header">
+        <span class="feed-title">Live Headlines — Risk & Compliance</span>
+        <span class="live-dot">Live</span>
+      </div>
+      <div class="feed-tabs">
+        <button class="feed-tab active" onclick="loadFeed('shrm_law', this)">SHRM Compliance</button>
+        <button class="feed-tab" onclick="loadFeed('hrdive', this)">HR Dive</button>
+        <button class="feed-tab" onclick="loadFeed('iapp', this)">IAPP AI</button>
+        <button class="feed-tab" onclick="loadFeed('ogletree', this)">Ogletree</button>
+        <button class="feed-tab" onclick="loadFeed('littler', this)">Littler</button>
+      </div>
+      <div class="feed-list" id="feed-list"><div class="feed-loading">Loading latest headlines…</div></div>
+      <div class="feed-footer-note">Updates every time you open the dashboard · Click any headline to read the full article · Not legal advice</div>
+    </div>
+  </div>
+
+  <!-- TAB: CHECKLIST -->
+  <div id="checklist" class="section">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Critical actions — do now</div>
+        <div class="checklist-item">
+          <span class="check-priority p-critical">CRITICAL</span>
+          <div class="check-content">
+            <div class="check-title">Audit your AI tool inventory</div>
+            <div class="check-desc">Identify every tool in your HR and recruiting stack that uses algorithmic processing — ATS ranking, sourcing AI, video interview scoring, scheduling bots, performance analytics. Document whether each vendor classifies their tool as high-risk.</div>
+          </div>
+        </div>
+        <div class="checklist-item">
+          <span class="check-priority p-critical">CRITICAL</span>
+          <div class="check-content">
+            <div class="check-title">Confirm EU AI Act exposure</div>
+            <div class="check-desc">If your company recruits EU candidates, employs EU-based workers, or deploys global HR platforms used by EU teams — you are in scope for the EU AI Act regardless of where your HQ is located. August 2, 2026 deadline.</div>
+          </div>
+        </div>
+        <div class="checklist-item">
+          <span class="check-priority p-critical">CRITICAL</span>
+          <div class="check-content">
+            <div class="check-title">Establish human-in-the-loop controls</div>
+            <div class="check-desc">Required by California (Oct 2025), EU AI Act, and recommended under EEOC guidance. A qualified person must be able to understand, question, and override AI outputs at all employment decision points.</div>
+          </div>
+        </div>
+        <div class="checklist-item">
+          <span class="check-priority p-critical">CRITICAL</span>
+          <div class="check-content">
+            <div class="check-title">Build notice & disclosure workflows</div>
+            <div class="check-desc">Illinois (Jan 2026) and NYC Local Law 144 require advance notice to candidates when AI influences employment decisions. Colorado (Jun 2026) requires transparency disclosures. Build triggered notice workflows into your ATS or recruiting process.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">High priority — complete before Q3 2026</div>
+        <div class="checklist-item">
+          <span class="check-priority p-high">HIGH</span>
+          <div class="check-content">
+            <div class="check-title">Conduct bias testing on AI hiring tools</div>
+            <div class="check-desc">Required under California, Colorado, EU AI Act, and NYC Local Law 144. Test AI tools for disparate impact across gender, race, age, and other protected classes. Document results and remediation steps.</div>
+          </div>
+        </div>
+        <div class="checklist-item">
+          <span class="check-priority p-high">HIGH</span>
+          <div class="check-content">
+            <div class="check-title">Establish 4-year data retention for ADS records</div>
+            <div class="check-desc">California requires retention of input data, outputs, criteria used, and bias testing results for automated decision systems for a minimum of 4 years. Begin data governance framework now.</div>
+          </div>
+        </div>
+        <div class="checklist-item">
+          <span class="check-priority p-high">HIGH</span>
+          <div class="check-content">
+            <div class="check-title">Review vendor contracts for AI Act compliance</div>
+            <div class="check-desc">Request compliance documentation, bias test reports, and technical files from every HR AI vendor. Ensure contracts define vendor liability for regulatory violations. Under California and EU rules, employers bear responsibility for vendor AI failures.</div>
+          </div>
+        </div>
+        <div class="checklist-item">
+          <span class="check-priority p-high">HIGH</span>
+          <div class="check-content">
+            <div class="check-title">Assign internal AI compliance ownership</div>
+            <div class="check-desc">Designate who owns AI governance in HR — typically a cross-functional role spanning HR, Legal, IT, and People Tech. Define accountability for bias monitoring, human oversight design, and compliance tracking.</div>
+          </div>
+        </div>
+        <div class="checklist-item">
+          <span class="check-priority p-medium">MEDIUM</span>
+          <div class="check-content">
+            <div class="check-title">Train HR team on AI literacy requirements</div>
+            <div class="check-desc">EU AI Act Article 4 requires AI literacy training for all staff involved in AI operations. Ensure HR team understands how your AI tools work, their limitations, and how to manage them responsibly.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: RHYTHM -->
+  <div id="rhythm" class="section">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">Daily monitoring — 5 min</div>
+        <div class="rhythm-row">
+          <div class="rhythm-when">Morning</div>
+          <div class="rhythm-body">
+            <div class="rhythm-what">Scan HR Dive Employment Law + SHRM Compliance for breaking regulatory news</div>
+            <div class="rhythm-src">hrdive.com/topic/employment-law · shrm.org</div>
+          </div>
+        </div>
+        <div class="rhythm-row">
+          <div class="rhythm-when">Alerts</div>
+          <div class="rhythm-body">
+            <div class="rhythm-what">Set Google Alerts for: "AI hiring law", "EEOC AI", "Colorado AI Act", "EU AI Act HR"</div>
+            <div class="rhythm-src">Free · Google Alerts</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Weekly — 30 min</div>
+        <div class="rhythm-row">
+          <div class="rhythm-when">Mon</div>
+          <div class="rhythm-body">
+            <div class="rhythm-what">Read one Littler or Ogletree AI employment law brief</div>
+            <div class="rhythm-src">littler.com · ogletree.com/insights</div>
+          </div>
+        </div>
+        <div class="rhythm-row">
+          <div class="rhythm-when">Wed</div>
+          <div class="rhythm-body">
+            <div class="rhythm-what">Check EU AI Act Tracker for new Commission guidance or enforcement updates</div>
+            <div class="rhythm-src">artificialintelligenceact.eu</div>
+          </div>
+        </div>
+        <div class="rhythm-row">
+          <div class="rhythm-when">Fri</div>
+          <div class="rhythm-body">
+            <div class="rhythm-what">Review IAPP AI Policy updates for privacy + AI Act intersection issues</div>
+            <div class="rhythm-src">iapp.org/news/topic/artificial-intelligence</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Monthly — 1 hour</div>
+        <div class="rhythm-row">
+          <div class="rhythm-when">Week 1</div>
+          <div class="rhythm-body">
+            <div class="rhythm-what">Review compliance checklist progress — update documentation and audit logs</div>
+          </div>
+        </div>
+        <div class="rhythm-row">
+          <div class="rhythm-when">Week 2</div>
+          <div class="rhythm-body">
+            <div class="rhythm-what">Vendor check — follow up with AI tool providers on compliance documentation and bias test results</div>
+          </div>
+        </div>
+        <div class="rhythm-row">
+          <div class="rhythm-when">Week 3</div>
+          <div class="rhythm-body">
+            <div class="rhythm-what">Read one Gartner or Forrester brief on AI governance frameworks</div>
+            <div class="rhythm-src">gartner.com · forrester.com</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Quarterly</div>
+        <div class="rhythm-row">
+          <div class="rhythm-when">Q2 2026</div>
+          <div class="rhythm-body">
+            <div class="rhythm-what">Colorado AI Act deadline — Jun 30. Final compliance verification for all high-risk AI tools used in employment decisions</div>
+          </div>
+        </div>
+        <div class="rhythm-row">
+          <div class="rhythm-when">Q3 2026</div>
+          <div class="rhythm-body">
+            <div class="rhythm-what">EU AI Act high-risk system deadline — Aug 2. Full compliance required for any AI affecting EU candidates or employees</div>
+          </div>
+        </div>
+        <div class="rhythm-row">
+          <div class="rhythm-when">Ongoing</div>
+          <div class="rhythm-body">
+            <div class="rhythm-what">Annual bias audit cycle — NYC Local Law 144 requires independent annual audits of automated employment decision tools</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB: KEY VOICES -->
+  <div id="leaders" class="section">
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-title">Employment law firms to follow</div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(167,139,250,0.1); font-size:12px; font-weight:500; color:#a78bfa;">LT</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.littler.com" target="_blank">Littler Mendelson</a></div>
+            <div class="source-desc">Largest employment law firm — leading AI hiring compliance analysis</div>
+          </div>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(96,165,250,0.1); font-size:12px; font-weight:500; color:#60a5fa;">OD</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://ogletree.com" target="_blank">Ogletree Deakins</a></div>
+            <div class="source-desc">Employment law firm — deep state-by-state AI law tracking</div>
+          </div>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(110,231,183,0.1); font-size:12px; font-weight:500; color:#6ee7b7;">HK</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.hklaw.com" target="_blank">Holland & Knight</a></div>
+            <div class="source-desc">Federal-state AI law divergence and EEOC guidance analysis</div>
+          </div>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(232,113,90,0.1); font-size:12px; font-weight:500; color:#e8715a;">FP</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.fisherphillips.com/en/news-insights/artificial-intelligence.html" target="_blank">Fisher Phillips — AI</a></div>
+            <div class="source-desc">AI in the workplace legal updates and employer guidance</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Regulatory bodies to monitor</div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(232,200,74,0.1);">🏛️</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.eeoc.gov" target="_blank">EEOC</a></div>
+            <div class="source-desc">Equal Employment Opportunity Commission — Title VII + AI enforcement</div>
+          </div>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(96,165,250,0.1);">🇪🇺</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://digital-strategy.ec.europa.eu/en/policies/european-approach-artificial-intelligence" target="_blank">EU AI Office</a></div>
+            <div class="source-desc">European Commission AI Office — AI Act enforcement coordination</div>
+          </div>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(110,231,183,0.1);">🔒</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://cppa.ca.gov" target="_blank">California CPPA</a></div>
+            <div class="source-desc">California Privacy Protection Agency — ADMT regulations and enforcement</div>
+          </div>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(167,139,250,0.1);">⚙️</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.nist.gov/artificial-intelligence" target="_blank">NIST AI RMF</a></div>
+            <div class="source-desc">National Institute of Standards — AI Risk Management Framework</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Key frameworks & concepts</div>
+        <div class="rhythm-row" style="padding:10px 0;">
+          <div class="rhythm-body"><div class="rhythm-what" style="font-weight:500;">Disparate Impact</div><div class="rhythm-src">When AI produces discriminatory outcomes against protected classes, even without discriminatory intent. Core Title VII risk for AI hiring tools.</div></div>
+        </div>
+        <div class="rhythm-row" style="padding:10px 0;">
+          <div class="rhythm-body"><div class="rhythm-what" style="font-weight:500;">High-Risk AI Classification</div><div class="rhythm-src">EU AI Act Annex III explicitly classifies all recruitment, screening, selection, and performance AI as high-risk — triggering mandatory compliance obligations.</div></div>
+        </div>
+        <div class="rhythm-row" style="padding:10px 0;">
+          <div class="rhythm-body"><div class="rhythm-what" style="font-weight:500;">Human-in-the-Loop (HITL)</div><div class="rhythm-src">Required by multiple laws — a qualified person must be able to understand, question, and override AI employment decisions.</div></div>
+        </div>
+        <div class="rhythm-row" style="padding:10px 0;">
+          <div class="rhythm-body"><div class="rhythm-what" style="font-weight:500;">Brussels Effect</div><div class="rhythm-src">EU AI Act expected to set global compliance standard, similar to GDPR. Multinationals will likely apply EU standards globally.</div></div>
+        </div>
+        <div class="rhythm-row" style="padding:10px 0; border-bottom:none;">
+          <div class="rhythm-body"><div class="rhythm-what" style="font-weight:500;">Deployer vs Provider Liability</div><div class="rhythm-src">Both tool vendors (providers) and the employers who use them (deployers) face liability under EU AI Act and US state laws. Vendor contracts must define accountability.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">The Signal · Risk & Compliance · <span id="footer-date"></span></div>
+    <div class="footer-right">
+      <a href="https://agentforchange-hr-tech.github.io/the-signal" class="footer-link">← Back to The Signal</a>
+      <a href="https://agentforchange-hr-tech.github.io/hr-tech-intel/" class="footer-link">Talent Acquisition →</a>
+      <a href="https://www.linkedin.com/in/alexrivera1/" target="_blank" class="footer-link">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /site-wrap -->
+
+<script>
+  /* ── DATE ── */
+  const now = new Date();
+  const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  const shortDate = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  document.getElementById('hero-date').textContent = shortDate;
+  document.getElementById('footer-date').textContent = dateStr;
+  document.getElementById('reg-date').textContent = shortDate;
+
+  /* ── DARK MODE ── */
+  function toggleDark() {
+    // Page is dark by default; toggle adds a light class
+    document.body.classList.toggle('light-mode');
+    document.getElementById('dark-toggle').textContent = document.body.classList.contains('light-mode') ? 'Dark' : 'Light';
+  }
+
+  /* ── SHARE ── */
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      const btn = document.getElementById('share-btn');
+      btn.classList.add('copied');
+      btn.textContent = 'Copied!';
+      setTimeout(() => { btn.classList.remove('copied'); btn.textContent = 'Share'; }, 2000);
+    });
+  }
+
+  /* ── TABS ── */
+  function showTab(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  /* ── SEARCH INDEX ── */
+  const SEARCH_INDEX = [
+    { title: 'California ADS Regulations', desc: 'Effective Oct 2025 — automated decision systems in employment', type: 'Regulation', url: 'https://calcivilrights.ca.gov' },
+    { title: 'Illinois HB 3773', desc: 'AI in employment decisions — effective Jan 1, 2026', type: 'Regulation', url: 'https://www.ilga.gov' },
+    { title: 'Colorado AI Act (SB 24-205)', desc: 'High-risk AI compliance deadline Jun 30, 2026', type: 'Regulation', url: 'https://coag.gov/ai' },
+    { title: 'Texas TRAIGA', desc: 'Responsible AI Governance Act — effective Jan 1, 2026', type: 'Regulation', url: 'https://capitol.texas.gov' },
+    { title: 'NYC Local Law 144', desc: 'Annual bias audit required for automated employment decision tools', type: 'Regulation', url: 'https://www.nyc.gov' },
+    { title: 'EU AI Act', desc: 'High-risk HR system compliance deadline Aug 2, 2026', type: 'Regulation', url: 'https://artificialintelligenceact.eu' },
+    { title: 'SHRM Compliance', desc: 'HR-focused legal updates and AI compliance guidance', type: 'Source', url: 'https://www.shrm.org/topics-tools/topics/employment-law-compliance' },
+    { title: 'HR Dive Employment Law', desc: 'Breaking state and federal AI hiring law coverage', type: 'Source', url: 'https://www.hrdive.com/topic/employment-law/' },
+    { title: 'Littler — Workplace Policy', desc: 'Top employment law firm — AI regulation analysis', type: 'Source', url: 'https://www.littler.com' },
+    { title: 'Ogletree Deakins Blog', desc: 'Deep AI hiring compliance briefs', type: 'Source', url: 'https://ogletree.com/insights-resources/blog-posts/' },
+    { title: 'EU AI Act Tracker', desc: 'Independent tracker for EU AI Act developments and timelines', type: 'Source', url: 'https://artificialintelligenceact.eu' },
+    { title: 'IAPP AI Policy', desc: 'Privacy + AI Act intersection analysis', type: 'Source', url: 'https://iapp.org/news/topic/artificial-intelligence/' },
+    { title: 'NIST AI Risk Management Framework', desc: 'Map, Measure, Manage, Govern — US federal AI governance', type: 'Framework', url: 'https://www.nist.gov/artificial-intelligence' },
+    { title: 'Disparate Impact', desc: 'AI discrimination risk — core Title VII exposure for hiring tools', type: 'Concept', url: null },
+    { title: 'High-Risk AI Classification', desc: 'EU AI Act Annex III — all recruitment AI is high-risk', type: 'Concept', url: null },
+    { title: 'Human-in-the-Loop', desc: 'Required by multiple laws — human oversight and override capability', type: 'Concept', url: null },
+    { title: 'Brussels Effect', desc: 'EU AI Act expected to set global compliance standard like GDPR', type: 'Concept', url: null },
+    { title: 'Deployer vs Provider Liability', desc: 'Both vendors and employers face liability under AI laws', type: 'Concept', url: null },
+    { title: 'Bias Audit', desc: 'Independent annual audit required by NYC Local Law 144', type: 'Concept', url: null },
+    { title: 'EEOC', desc: 'Equal Employment Opportunity Commission — Title VII + AI enforcement', type: 'Regulator', url: 'https://www.eeoc.gov' },
+  ];
+
+  function runSearch(q) {
+    const el = document.getElementById('search-results');
+    if (!q || q.length < 2) { el.classList.remove('visible'); return; }
+    const lower = q.toLowerCase();
+    const hits = SEARCH_INDEX.filter(i => i.title.toLowerCase().includes(lower) || i.desc.toLowerCase().includes(lower) || i.type.toLowerCase().includes(lower)).slice(0, 8);
+    if (!hits.length) {
+      el.innerHTML = `<div class="search-empty">No results for "${q}"</div>`;
+    } else {
+      el.innerHTML = hits.map(h => `
+        <a class="sr-item" href="${h.url || '#'}" ${h.url ? 'target="_blank"' : ''}>
+          <span class="sr-type">${h.type}</span>
+          <div><div class="sr-title">${h.title}</div><div class="sr-desc">${h.desc}</div></div>
+        </a>`).join('');
+    }
+    el.classList.add('visible');
+  }
+
+  function closeSearch() { document.getElementById('search-results').classList.remove('visible'); }
+
+  /* ── RSS FEEDS ── */
+  const RSS_FEEDS = {
+    shrm_law:  { url: 'https://www.shrm.org/rss/pages/rss.aspx?category=compliance', label: 'SHRM Compliance' },
+    hrdive:    { url: 'https://www.hrdive.com/feeds/news/', label: 'HR Dive' },
+    iapp:      { url: 'https://iapp.org/news/rss/', label: 'IAPP AI Policy' },
+    ogletree:  { url: 'https://ogletree.com/rss/', label: 'Ogletree Deakins' },
+    littler:   { url: 'https://www.littler.com/publication-press/rss.xml', label: 'Littler' },
+  };
+
+  function formatDate(d) {
+    if (!d) return '';
+    try { return new Date(d).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
+    catch(e) { return ''; }
+  }
+
+  async function fetchFeed(key, listId) {
+    const list = document.getElementById(listId);
+    if (!list) return;
+    list.innerHTML = '<div class="feed-loading">Loading headlines…</div>';
+    const feed = RSS_FEEDS[key];
+    const proxy = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feed.url)}&count=8`;
+    try {
+      const res = await fetch(proxy);
+      const data = await res.json();
+      if (data.status !== 'ok' || !data.items?.length) throw new Error('empty');
+      list.innerHTML = data.items.map(item => `
+        <a class="feed-item" href="${item.link}" target="_blank" rel="noopener noreferrer">
+          <span class="feed-item-source">${feed.label}</span>
+          <span class="feed-item-title">${item.title}</span>
+          <span class="feed-item-date">${formatDate(item.pubDate)}</span>
+        </a>`).join('');
+    } catch(e) {
+      const siteUrl = feed.url.split('/').slice(0,3).join('/');
+      list.innerHTML = `<div class="feed-error">Live feed unavailable — <a href="${siteUrl}" target="_blank" style="color:var(--accent);">visit ${feed.label} directly →</a></div>`;
+    }
+  }
+
+  function loadFeed(key, btn) {
+    document.querySelectorAll('#rss-panel .feed-tab').forEach(t => t.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    fetchFeed(key, 'feed-list');
+  }
+
+  /* ── INIT ── */
+  window.addEventListener('DOMContentLoaded', () => {
+    fetchFeed('shrm_law', 'feed-list');
+  });
+</script>
+</body>
+</html>
