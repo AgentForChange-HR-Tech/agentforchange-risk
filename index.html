@@ -3,65 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Risk & Compliance — The Signal</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<title>Risk & Compliance — The Signal</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg:        #0b0c0f;
-    --bg-2:      #111318;
-    --bg-3:      #181a20;
-    --ink:       #eeedf0;
-    --ink-mid:   #b0b2bc;
-    --ink-soft:  #70727e;
-    --ink-faint: #3a3c46;
-    --signal:    #e8c84a;
-    --signal-dim:#a88d2e;
-    --signal-bg: rgba(232,200,74,0.07);
-    --accent:    #e8715a;
-    --accent-dim:#a84f3e;
-    --accent-bg: rgba(232,113,90,0.08);
-    --teal:      #4ecdc4;
-    --violet:    #a78bfa;
-    --green:     #6ee7b7;
-    --blue:      #60a5fa;
-    --border:    rgba(238,237,240,0.08);
-    --border-md: rgba(238,237,240,0.14);
-    --radius:    12px;
-    --radius-sm: 7px;
+    --ink: #0f1117; --ink-mid: #3a3d4a; --ink-soft: #717585; --ink-faint: #a8aab8;
+    --surface: #f7f7f9; --surface-alt: #eeeef3; --white: #ffffff;
+    --accent: #0066cc; --accent-light: #e8f0fb; --accent-mid: #4d94e0;
+    --teal: #00897b; --teal-light: #e0f2f0;
+    --amber: #c97a00; --amber-light: #fff3e0;
+    --coral: var(--coral); --coral-light: #fdecea;
+    --green: #2e7d32; --green-light: #e8f5e9;
+    --border: var(--border); --border-strong: var(--border-strong);
+    --radius: 10px; --radius-sm: 6px;
+    --shadow: 0 2px 12px rgba(15,17,23,0.07), 0 1px 3px rgba(15,17,23,0.05);
+    --shadow-md: 0 4px 24px var(--border), 0 2px 6px rgba(15,17,23,0.06);
+    --header-bg: #ffffff; --body-bg: #f7f7f9; --card-bg: #ffffff;
+  }
+
+  /* ── DARK MODE ── */
+  body.dark {
+    --ink: #eeeef3; --ink-mid: #c0c2cc; --ink-soft: #8a8c99; --ink-faint: #5a5c6e;
+    --surface: #0f1117; --surface-alt: #1a1c22; --white: #1e2028;
+    --accent: #4d94e0; --accent-light: #1a2a40; --accent-mid: #6aabf0;
+    --teal: #4db6ac; --teal-light: #0d2926;
+    --amber: #ffb74d; --amber-light: #2a1f0a;
+    --coral: #ef7b62; --coral-light: #2a1210;
+    --green: #66bb6a; --green-light: #0d2010;
+    --border: rgba(238,238,243,0.12); --border-strong: rgba(238,238,243,0.22);
+    --header-bg: #14161e; --body-bg: #0f1117; --card-bg: #1a1c24;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
 
   body {
-    font-family: 'IBM Plex Sans', sans-serif;
-    background: var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    background: var(--body-bg);
     color: var(--ink);
     min-height: 100vh;
+    transition: background 0.2s, color 0.2s;
     overflow-x: hidden;
   }
 
-  body::before {
-    content: '';
-    position: fixed; inset: 0; z-index: 0; pointer-events: none;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    opacity: 0.4;
-  }
+  
+  
 
-  .bg-glow { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-  .glow-orb { position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.1; animation: drift 20s ease-in-out infinite alternate; }
-  .glow-1 { width: 500px; height: 500px; background: var(--accent); top: -150px; right: -100px; animation-delay: 0s; }
-  .glow-2 { width: 350px; height: 350px; background: var(--signal); bottom: -100px; left: -80px; animation-delay: -8s; }
-  .glow-3 { width: 280px; height: 280px; background: var(--violet); top: 45%; right: 15%; animation-delay: -15s; }
+  
+  body.dark 
+  
+  
+  
+  
 
-  @keyframes drift { from { transform: translate(0,0) scale(1); } to { transform: translate(30px,25px) scale(1.07); } }
+   to { transform: translate(30px,25px) scale(1.07); } }
 
   .site-wrap { position: relative; z-index: 1; }
 
   /* ── NAV ── */
   nav {
     position: sticky; top: 0; z-index: 100;
-    background: rgba(11,12,15,0.88);
+    background: rgba(255,255,255,0.92);
     backdrop-filter: blur(16px);
     border-bottom: 1px solid var(--border);
     padding: 0 2rem;
@@ -74,27 +76,27 @@
   }
 
   .nav-back {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'DM Sans', sans-serif;
     font-size: 12px; color: var(--ink-soft);
     text-decoration: none; display: flex; align-items: center; gap: 6px;
     transition: color 0.15s;
   }
-  .nav-back:hover { color: var(--signal); }
+  .nav-back:hover { color: var(--accent); }
 
   .nav-logo {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 14px; font-weight: 500; color: var(--signal);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500; color: var(--accent);
     letter-spacing: 0.04em; text-decoration: none;
     display: flex; align-items: center; gap: 8px;
   }
 
-  .nav-logo::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--signal); animation: blink 2.4s ease-in-out infinite; }
-  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+  .nav-logo::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: blink 2.4s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
 
   .nav-domain {
     font-size: 12px; padding: 4px 10px; border-radius: 12px;
-    background: var(--accent-bg); color: var(--accent);
-    border: 1px solid var(--accent-dim); font-weight: 500;
+    background: var(--accent-light); color: var(--accent);
+    border: 1px solid var(--accent); font-weight: 500;
     white-space: nowrap;
   }
 
@@ -108,23 +110,23 @@
   .page-hero {
     padding: 5rem 2rem 3rem;
     border-bottom: 1px solid var(--border);
-    background: linear-gradient(180deg, rgba(232,113,90,0.04) 0%, transparent 100%);
+    background: linear-gradient(180deg, rgba(201,79,53,0.04) 0%, transparent 100%);
   }
 
   .page-hero-inner { max-width: 1140px; margin: 0 auto; }
 
   .hero-breadcrumb {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'DM Sans', sans-serif;
     font-size: 11px; color: var(--ink-faint);
     letter-spacing: 0.1em; text-transform: uppercase;
     margin-bottom: 1.25rem; display: flex; align-items: center; gap: 8px;
   }
 
-  .hero-breadcrumb a { color: var(--signal); text-decoration: none; }
+  .hero-breadcrumb a { color: var(--accent); text-decoration: none; }
   .hero-breadcrumb a:hover { text-decoration: underline; }
 
   .page-hero h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'DM Serif Display', serif;
     font-size: clamp(2.5rem, 6vw, 4.5rem);
     font-weight: 600; line-height: 1.05;
     color: var(--ink); letter-spacing: -0.02em;
@@ -142,15 +144,15 @@
 
   .meta-chip {
     font-size: 11px; padding: 4px 10px; border-radius: 12px;
-    border: 1px solid var(--border-md); color: var(--ink-soft);
-    font-family: 'IBM Plex Mono', monospace; letter-spacing: 0.04em;
+    border: 1px solid var(--border-strong); color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif; letter-spacing: 0.04em;
   }
 
-  .meta-chip.hot { background: var(--accent-bg); color: var(--accent); border-color: var(--accent-dim); }
+  .meta-chip.hot { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
   /* ── URGENCY BANNER ── */
   .urgency-banner {
-    background: var(--bg-2);
+    background: var(--card-bg); border-bottom: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     padding: 0.85rem 2rem;
   }
@@ -161,11 +163,11 @@
   }
 
   .urgency-label {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'DM Sans', sans-serif;
     font-size: 10px; font-weight: 500; color: var(--accent);
     letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap;
     padding: 3px 8px; border-radius: 6px;
-    background: var(--accent-bg); border: 1px solid var(--accent-dim);
+    background: var(--accent-light); border: 1px solid var(--accent);
   }
 
   .urgency-items { display: flex; gap: 1.5rem; flex-wrap: wrap; }
@@ -188,27 +190,27 @@
     overflow: hidden; margin-bottom: 2rem;
   }
 
-  .stat-item { background: var(--bg-2); padding: 1.25rem 1.5rem; }
-  .stat-val { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--accent); line-height: 1; }
+  .stat-item { background: var(--card-bg); padding: 1.25rem 1.5rem; }
+  .stat-val { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--accent); line-height: 1; }
   .stat-label { font-size: 11px; color: var(--ink-soft); margin-top: 5px; line-height: 1.4; }
 
   /* ── TABS ── */
   .tab-bar {
     display: flex; gap: 4px; margin-bottom: 1.5rem;
-    background: var(--bg-2); border: 1px solid var(--border);
+    background: var(--card-bg); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 5px;
     flex-wrap: wrap;
   }
 
   .tab-btn {
     padding: 7px 16px; border-radius: var(--radius-sm); border: none;
-    background: transparent; font-family: 'IBM Plex Sans', sans-serif;
+    background: transparent; font-family: 'DM Sans', sans-serif;
     font-size: 13px; font-weight: 400; color: var(--ink-soft);
     cursor: pointer; transition: all 0.15s; white-space: nowrap;
   }
 
   .tab-btn:hover { background: rgba(238,237,240,0.05); color: var(--ink); }
-  .tab-btn.active { background: var(--accent); color: #0b0c0f; font-weight: 500; }
+  .tab-btn.active { background: var(--accent); color: var(--ink); font-weight: 500; }
 
   .section { display: none; }
   .section.active { display: block; }
@@ -219,12 +221,12 @@
 
   /* ── CARDS ── */
   .card {
-    background: var(--bg-2); border: 1px solid var(--border);
+    background: var(--card-bg); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 1.25rem 1.5rem;
   }
 
   .card-title {
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'DM Sans', sans-serif;
     font-size: 10px; font-weight: 500; color: var(--ink-faint);
     text-transform: uppercase; letter-spacing: 0.1em;
     margin-bottom: 1rem; padding-bottom: 0.6rem;
@@ -246,20 +248,20 @@
   .freq-badge { font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
   .freq-daily { background: rgba(78,205,196,0.1); color: var(--teal); }
   .freq-weekly { background: rgba(96,165,250,0.1); color: var(--blue); }
-  .freq-monthly { background: rgba(232,200,74,0.1); color: var(--signal); }
-  .freq-breaking { background: var(--accent-bg); color: var(--accent); }
+  .freq-monthly { background: rgba(0,102,204,0.1); color: var(--accent); }
+  .freq-breaking { background: var(--accent-light); color: var(--accent); }
 
   /* ── PILL ── */
   .pill {
     font-size: 12px; padding: 5px 12px; border-radius: 20px;
-    border: 1px solid var(--border-md); color: var(--ink-mid);
+    border: 1px solid var(--border-strong); color: var(--ink-mid);
     cursor: pointer; transition: all 0.15s; text-decoration: none; display: inline-block;
   }
-  .pill:hover { background: var(--accent-bg); color: var(--accent); border-color: var(--accent-dim); }
+  .pill:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
   /* ── REGULATION CARDS ── */
   .reg-card {
-    background: var(--bg-2); border: 1px solid var(--border);
+    background: var(--card-bg); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 1.25rem 1.5rem;
     border-left: 3px solid var(--reg-color, var(--accent));
     margin-bottom: 12px;
@@ -272,8 +274,8 @@
     white-space: nowrap; flex-shrink: 0;
   }
   .status-live { background: rgba(110,231,183,0.1); color: var(--green); }
-  .status-imminent { background: var(--accent-bg); color: var(--accent); }
-  .status-upcoming { background: rgba(232,200,74,0.1); color: var(--signal); }
+  .status-imminent { background: var(--accent-light); color: var(--accent); }
+  .status-upcoming { background: rgba(0,102,204,0.1); color: var(--accent); }
   .status-proposed { background: rgba(167,139,250,0.1); color: var(--violet); }
 
   .reg-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 10px; }
@@ -284,7 +286,7 @@
   /* ── RHYTHM ROWS ── */
   .rhythm-row { display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
   .rhythm-row:last-child { border-bottom: none; }
-  .rhythm-when { font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.05em; min-width: 80px; padding-top: 2px; flex-shrink: 0; }
+  .rhythm-when { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.05em; min-width: 80px; padding-top: 2px; flex-shrink: 0; }
   .rhythm-what { font-size: 13px; color: var(--ink); line-height: 1.5; }
   .rhythm-src { font-size: 11px; color: var(--ink-faint); margin-top: 3px; }
 
@@ -298,35 +300,35 @@
   /* ── CHECKLIST ── */
   .checklist-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
   .checklist-item:last-child { border-bottom: none; }
-  .check-box { width: 18px; height: 18px; border-radius: 4px; border: 1px solid var(--border-md); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; }
-  .check-priority { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 6px; flex-shrink: 0; margin-top: 2px; white-space: nowrap; font-family: 'IBM Plex Mono', monospace; }
-  .p-critical { background: var(--accent-bg); color: var(--accent); }
-  .p-high { background: rgba(232,200,74,0.1); color: var(--signal); }
+  .check-box { width: 18px; height: 18px; border-radius: 4px; border: 1px solid var(--border-strong); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; }
+  .check-priority { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 6px; flex-shrink: 0; margin-top: 2px; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
+  .p-critical { background: var(--accent-light); color: var(--accent); }
+  .p-high { background: rgba(0,102,204,0.1); color: var(--accent); }
   .p-medium { background: rgba(96,165,250,0.1); color: var(--blue); }
   .check-content { flex: 1; }
   .check-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
   .check-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
 
   /* ── LIVE FEED ── */
-  .live-feed-panel { background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 16px; }
+  .live-feed-panel { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 16px; }
   .feed-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
-  .feed-title { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; }
-  .live-dot { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--accent); font-weight: 500; font-family: 'IBM Plex Mono', monospace; }
+  .feed-title { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; }
+  .live-dot { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--accent); font-weight: 500; font-family: 'DM Sans', sans-serif; }
   .live-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: blink 2s infinite; }
   .feed-tabs { display: flex; gap: 4px; margin-bottom: 1rem; flex-wrap: wrap; }
-  .feed-tab { font-size: 11px; padding: 4px 10px; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--ink-soft); cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; transition: all 0.12s; }
-  .feed-tab.active { background: var(--accent); color: #0b0c0f; border-color: var(--accent); font-weight: 500; }
+  .feed-tab { font-size: 11px; padding: 4px 10px; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--ink-soft); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.12s; }
+  .feed-tab.active { background: var(--accent); color: var(--ink); border-color: var(--accent); font-weight: 500; }
   .feed-tab:hover:not(.active) { background: rgba(238,237,240,0.05); color: var(--ink); }
   .feed-list { min-height: 180px; }
   .feed-item { display: flex; flex-direction: column; gap: 3px; padding: 10px 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: all 0.12s; }
   .feed-item:last-child { border-bottom: none; }
   .feed-item:hover .feed-item-title { color: var(--accent); }
-  .feed-item-source { font-size: 10px; font-weight: 500; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; font-family: 'IBM Plex Mono', monospace; }
+  .feed-item-source { font-size: 10px; font-weight: 500; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; font-family: 'DM Sans', sans-serif; }
   .feed-item-title { font-size: 13px; color: var(--ink); line-height: 1.4; transition: color 0.12s; }
   .feed-item-date { font-size: 11px; color: var(--ink-faint); }
   .feed-loading { display: flex; align-items: center; justify-content: center; height: 100px; font-size: 13px; color: var(--ink-faint); }
   .feed-error { font-size: 12px; color: var(--ink-faint); padding: 12px 0; text-align: center; }
-  .feed-footer-note { margin-top: 10px; font-size: 11px; color: var(--ink-faint); font-family: 'IBM Plex Mono', monospace; }
+  .feed-footer-note { margin-top: 10px; font-size: 11px; color: var(--ink-faint); font-family: 'DM Sans', sans-serif; }
 
   /* ── SEARCH ── */
   .search-wrap { margin-bottom: 1.5rem; position: relative; }
@@ -334,35 +336,37 @@
   #search-input {
     width: 100%; padding: 9px 12px 9px 34px;
     border: 1px solid var(--border); border-radius: var(--radius);
-    background: var(--bg-2); color: var(--ink);
-    font-family: 'IBM Plex Sans', sans-serif; font-size: 13px;
+    background: var(--card-bg); color: var(--ink);
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
     outline: none; transition: border-color 0.15s;
   }
   #search-input:focus { border-color: var(--accent); }
   #search-input::placeholder { color: var(--ink-faint); }
-  .search-results { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: var(--bg-3); border: 1px solid var(--border-md); border-radius: var(--radius); z-index: 200; display: none; max-height: 300px; overflow-y: auto; }
+  .search-results { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: var(--surface-alt); border: 1px solid var(--border-strong); border-radius: var(--radius); z-index: 200; display: none; max-height: 300px; overflow-y: auto; }
   .search-results.visible { display: block; }
   .sr-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--border); cursor: pointer; text-decoration: none; transition: background 0.1s; }
   .sr-item:last-child { border-bottom: none; }
   .sr-item:hover { background: rgba(238,237,240,0.04); }
-  .sr-type { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 6px; background: var(--accent-bg); color: var(--accent); white-space: nowrap; flex-shrink: 0; margin-top: 2px; font-family: 'IBM Plex Mono', monospace; }
+  .sr-type { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 6px; background: var(--accent-light); color: var(--accent); white-space: nowrap; flex-shrink: 0; margin-top: 2px; font-family: 'DM Sans', sans-serif; }
   .sr-title { font-size: 13px; color: var(--ink); line-height: 1.4; }
   .sr-desc { font-size: 11px; color: var(--ink-faint); margin-top: 1px; }
   .search-empty { padding: 14px; font-size: 13px; color: var(--ink-faint); text-align: center; }
 
   /* ── SHARE BTN ── */
-  .hdr-btn { display: flex; align-items: center; gap: 5px; font-size: 12px; padding: 5px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-md); background: transparent; color: var(--ink-soft); cursor: pointer; font-family: 'IBM Plex Sans', sans-serif; transition: all 0.12s; white-space: nowrap; text-decoration: none; }
+  .hdr-btn { display: flex; align-items: center; gap: 5px; font-size: 12px; padding: 5px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-strong); background: transparent; color: var(--ink-soft); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.12s; white-space: nowrap; text-decoration: none; }
   .hdr-btn:hover { color: var(--ink); background: rgba(238,237,240,0.05); }
-  .hdr-btn.copied { background: var(--accent-bg); color: var(--accent); border-color: var(--accent-dim); }
+  .hdr-btn.copied { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
   /* ── FOOTER ── */
-  footer { border-top: 1px solid var(--border); background: var(--bg-2); padding: 2rem; margin-top: 3rem; }
+  footer { border-top: 1px solid var(--border); background: var(--card-bg); padding: 2rem; margin-top: 3rem; }
   .footer-inner { max-width: 1140px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
-  .footer-left { font-size: 12px; color: var(--ink-faint); font-family: 'IBM Plex Mono', monospace; }
+  .footer-left { font-size: 12px; color: var(--ink-faint); font-family: 'DM Sans', sans-serif; }
   .footer-right { display: flex; gap: 12px; flex-wrap: wrap; }
   .footer-link { font-size: 12px; color: var(--ink-soft); text-decoration: none; transition: color 0.12s; }
-  .footer-link:hover { color: var(--signal); }
+  .footer-link:hover { color: var(--accent); }
 
+
+  
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .nav-links { display: none; }
@@ -378,9 +382,7 @@
 </head>
 <body>
 
-<div class="bg-glow">
-  <div class="glow-orb glow-1"></div>
-  <div class="glow-orb glow-2"></div>
+<div class="glow-orb glow-2"></div>
   <div class="glow-orb glow-3"></div>
 </div>
 
@@ -405,7 +407,7 @@
         Share
       </button>
       <button class="hdr-btn" onclick="window.print()">Print</button>
-      <button class="hdr-btn" id="dark-toggle" onclick="toggleDark()">Light</button>
+      <button class="hdr-btn" id="dark-toggle" onclick="toggleDark()">Dark</button>
     </div>
   </div>
 </nav>
@@ -494,9 +496,9 @@
     </div>
 
     <!-- US STATE LAWS -->
-    <div class="card-title" style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; margin-bottom:1rem;">US State Laws</div>
+    <div class="card-title" style="font-family:'DM Sans',monospace; font-size:10px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; margin-bottom:1rem;">US State Laws</div>
 
-    <div class="reg-card" style="--reg-color:#e8715a;">
+    <div class="reg-card" style="--reg-color:var(--coral);">
       <div class="reg-header">
         <div class="reg-name">California Civil Rights Council — ADS Regulations</div>
         <span class="reg-status status-live">● Live</span>
@@ -511,7 +513,7 @@
       </div>
     </div>
 
-    <div class="reg-card" style="--reg-color:#e8715a;">
+    <div class="reg-card" style="--reg-color:var(--coral);">
       <div class="reg-header">
         <div class="reg-name">Illinois HB 3773 — AI in Employment Decisions</div>
         <span class="reg-status status-live">● Live</span>
@@ -540,7 +542,7 @@
       </div>
     </div>
 
-    <div class="reg-card" style="--reg-color:#e8c84a;">
+    <div class="reg-card" style="--reg-color:var(--accent);">
       <div class="reg-header">
         <div class="reg-name">Texas TRAIGA — Responsible AI Governance Act</div>
         <span class="reg-status status-live">● Live</span>
@@ -568,7 +570,7 @@
     </div>
 
     <!-- EU -->
-    <div class="card-title" style="font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; margin:1.5rem 0 1rem;">EU & Global</div>
+    <div class="card-title" style="font-family:'DM Sans',monospace; font-size:10px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; margin:1.5rem 0 1rem;">EU & Global</div>
 
     <div class="reg-card" style="--reg-color:#60a5fa;">
       <div class="reg-header">
@@ -608,7 +610,7 @@
       <div class="card">
         <div class="card-title">Legal & regulatory intelligence — daily/weekly</div>
         <div class="source-row">
-          <div class="source-icon" style="background:rgba(232,113,90,0.1);">⚖️</div>
+          <div class="source-icon" style="background:rgba(201,79,53,0.1);">⚖️</div>
           <div class="source-info">
             <div class="source-name"><a href="https://www.shrm.org/topics-tools/topics/employment-law-compliance" target="_blank">SHRM — Employment Law & Compliance</a></div>
             <div class="source-desc">HR-focused legal updates, AI law summaries, compliance guidance</div>
@@ -640,7 +642,7 @@
           <span class="freq-badge freq-weekly">Weekly</span>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:rgba(232,200,74,0.1);">🌐</div>
+          <div class="source-icon" style="background:rgba(0,102,204,0.1);">🌐</div>
           <div class="source-info">
             <div class="source-name"><a href="https://www.hrmorning.com/articles/category/compliance/" target="_blank">HR Morning — Compliance</a></div>
             <div class="source-desc">Practical compliance news for HR practitioners</div>
@@ -672,7 +674,7 @@
           <span class="freq-badge freq-weekly">Weekly</span>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:rgba(232,113,90,0.1);">🔍</div>
+          <div class="source-icon" style="background:rgba(201,79,53,0.1);">🔍</div>
           <div class="source-info">
             <div class="source-name"><a href="https://www.fieldfisher.com/en/insights?topic=employment" target="_blank">Fieldfisher Employment Law</a></div>
             <div class="source-desc">EU employment law firm — AI Act HR compliance analysis</div>
@@ -696,7 +698,7 @@
       <div class="card">
         <div class="card-title">Federal & EEOC watch</div>
         <div class="source-row">
-          <div class="source-icon" style="background:rgba(232,200,74,0.1);">🏛️</div>
+          <div class="source-icon" style="background:rgba(0,102,204,0.1);">🏛️</div>
           <div class="source-info">
             <div class="source-name"><a href="https://www.eeoc.gov/artificial-intelligence" target="_blank">EEOC — AI in Employment</a></div>
             <div class="source-desc">Federal guidance on AI and employment discrimination — monitor for policy changes under current administration</div>
@@ -712,7 +714,7 @@
           <span class="freq-badge freq-monthly">Quarterly</span>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:rgba(232,113,90,0.1);">⚡</div>
+          <div class="source-icon" style="background:rgba(201,79,53,0.1);">⚡</div>
           <div class="source-info">
             <div class="source-name"><a href="https://www.hklaw.com/en/insights/publications?category=artificial-intelligence" target="_blank">Holland & Knight — AI Employment Law</a></div>
             <div class="source-desc">Federal-state AI law divergence analysis — regularly updated</div>
@@ -968,7 +970,7 @@
           </div>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:rgba(232,113,90,0.1); font-size:12px; font-weight:500; color:#e8715a;">FP</div>
+          <div class="source-icon" style="background:rgba(201,79,53,0.1); font-size:12px; font-weight:500; color:var(--coral);">FP</div>
           <div class="source-info">
             <div class="source-name"><a href="https://www.fisherphillips.com/en/news-insights/artificial-intelligence.html" target="_blank">Fisher Phillips — AI</a></div>
             <div class="source-desc">AI in the workplace legal updates and employer guidance</div>
@@ -979,7 +981,7 @@
       <div class="card">
         <div class="card-title">Regulatory bodies to monitor</div>
         <div class="source-row">
-          <div class="source-icon" style="background:rgba(232,200,74,0.1);">🏛️</div>
+          <div class="source-icon" style="background:rgba(0,102,204,0.1);">🏛️</div>
           <div class="source-info">
             <div class="source-name"><a href="https://www.eeoc.gov" target="_blank">EEOC</a></div>
             <div class="source-desc">Equal Employment Opportunity Commission — Title VII + AI enforcement</div>
@@ -1056,9 +1058,13 @@
 
   /* ── DARK MODE ── */
   function toggleDark() {
-    // Page is dark by default; toggle adds a light class
-    document.body.classList.toggle('light-mode');
-    document.getElementById('dark-toggle').textContent = document.body.classList.contains('light-mode') ? 'Dark' : 'Light';
+    const isDark = document.body.classList.toggle('dark');
+    document.getElementById('dark-toggle').textContent = isDark ? 'Light' : 'Dark';
+    localStorage.setItem('signal-rc-theme', isDark ? 'dark' : 'light');
+  }
+  if (localStorage.getItem('signal-rc-theme') === 'dark') {
+    document.body.classList.add('dark');
+    document.getElementById('dark-toggle').textContent = 'Light';
   }
 
   /* ── SHARE ── */
