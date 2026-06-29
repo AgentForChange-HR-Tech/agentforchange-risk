@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Immigration — The Signal</title>
+<title>Risk & Compliance — The Signal</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -14,7 +14,6 @@
     --amber: #c97a00; --amber-light: #fff3e0;
     --coral: #c94f35; --coral-light: #fdecea;
     --green: #2e7d32; --green-light: #e8f5e9;
-    --orange: #e65100; --orange-light: #fff3e0;
     --border: rgba(15,17,23,0.1); --border-strong: rgba(15,17,23,0.18);
     --radius: 10px; --radius-sm: 6px;
     --shadow: 0 2px 12px rgba(15,17,23,0.07), 0 1px 3px rgba(15,17,23,0.05);
@@ -22,6 +21,7 @@
     --header-bg: #ffffff; --body-bg: #f7f7f9; --card-bg: #ffffff;
   }
 
+  /* ── DARK MODE ── */
   body.dark {
     --ink: #eeeef3; --ink-mid: #c0c2cc; --ink-soft: #8a8c99; --ink-faint: #5a5c6e;
     --surface: #0f1117; --surface-alt: #1a1c22; --white: #1e2028;
@@ -30,7 +30,6 @@
     --amber: #ffb74d; --amber-light: #2a1f0a;
     --coral: #ef7b62; --coral-light: #2a1210;
     --green: #66bb6a; --green-light: #0d2010;
-    --orange: #fb923c; --orange-light: #2a1500;
     --border: rgba(238,238,243,0.12); --border-strong: rgba(238,238,243,0.22);
     --header-bg: #14161e; --body-bg: #0f1117; --card-bg: #1a1c24;
   }
@@ -40,240 +39,217 @@
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: var(--body-bg); color: var(--ink);
-    min-height: 100vh; font-size: 15px; line-height: 1.6;
+    background: var(--body-bg);
+    color: var(--ink);
+    min-height: 100vh;
     transition: background 0.2s, color 0.2s;
+    overflow-x: hidden;
   }
+
+  
+  
+
+  
+  body.dark 
+  
+  
+  
+  
+
+   to { transform: translate(30px,25px) scale(1.07); } }
+
+  .site-wrap { position: relative; z-index: 1; }
 
   /* ── NAV ── */
-  .site-header {
-    background: var(--header-bg); border-bottom: 1px solid var(--border);
-    padding: 0 2rem; position: sticky; top: 0; z-index: 100;
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
   }
 
-  .header-inner {
-    max-width: 1100px; margin: 0 auto;
+  .nav-inner {
+    max-width: 1140px; margin: 0 auto;
     display: flex; align-items: center; justify-content: space-between;
-    padding: 1rem 0; gap: 1rem; flex-wrap: wrap;
+    height: 56px; gap: 1rem;
   }
-
-  .header-left { display: flex; align-items: center; gap: 12px; }
 
   .nav-back {
-    font-size: 13px; color: var(--ink-soft); text-decoration: none;
-    display: flex; align-items: center; gap: 5px; transition: color 0.12s;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px; color: var(--ink-soft);
+    text-decoration: none; display: flex; align-items: center; gap: 6px;
+    transition: color 0.15s;
   }
   .nav-back:hover { color: var(--accent); }
 
-  .divider-v { width: 1px; height: 24px; background: var(--border-strong); }
+  .nav-logo {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px; font-weight: 500; color: var(--accent);
+    letter-spacing: 0.04em; text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
 
-  .header-title h1 {
+  .nav-logo::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: blink 2.4s ease-in-out infinite; }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  .nav-domain {
+    font-size: 12px; padding: 4px 10px; border-radius: 12px;
+    background: var(--accent-light); color: var(--accent);
+    border: 1px solid var(--accent); font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .nav-right { display: flex; align-items: center; gap: 10px; }
+
+  .nav-links { display: flex; gap: 4px; }
+  .nav-link { font-size: 13px; color: var(--ink-soft); text-decoration: none; padding: 5px 10px; border-radius: var(--radius-sm); transition: all 0.15s; }
+  .nav-link:hover { color: var(--ink); background: rgba(238,237,240,0.05); }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    padding: 5rem 2rem 3rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(180deg, rgba(201,79,53,0.04) 0%, transparent 100%);
+  }
+
+  .page-hero-inner { max-width: 1140px; margin: 0 auto; }
+
+  .hero-breadcrumb {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px; color: var(--ink-faint);
+    letter-spacing: 0.1em; text-transform: uppercase;
+    margin-bottom: 1.25rem; display: flex; align-items: center; gap: 8px;
+  }
+
+  .hero-breadcrumb a { color: var(--accent); text-decoration: none; }
+  .hero-breadcrumb a:hover { text-decoration: underline; }
+
+  .page-hero h1 {
     font-family: 'DM Serif Display', serif;
-    font-size: 1.1rem; font-weight: 400; color: var(--ink); line-height: 1.2;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 600; line-height: 1.05;
+    color: var(--ink); letter-spacing: -0.02em;
+    margin-bottom: 1rem;
   }
 
-  .header-title .subtitle {
-    font-size: 11px; color: var(--ink-soft);
-    letter-spacing: 0.06em; text-transform: uppercase; margin-top: 1px; font-weight: 500;
+  .page-hero h1 em { font-style: italic; color: var(--accent); }
+
+  .page-hero-desc {
+    font-size: 16px; color: var(--ink-soft); line-height: 1.75;
+    max-width: 680px; margin-bottom: 2rem;
   }
 
-  .header-actions { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
 
-  .badge {
-    font-size: 11px; font-weight: 500; padding: 4px 10px;
-    border-radius: 20px; letter-spacing: 0.04em; white-space: nowrap;
+  .meta-chip {
+    font-size: 11px; padding: 4px 10px; border-radius: 12px;
+    border: 1px solid var(--border-strong); color: var(--ink-soft);
+    font-family: 'DM Sans', sans-serif; letter-spacing: 0.04em;
   }
 
-  .badge-orange { background: var(--orange-light); color: var(--orange); border: 1px solid rgba(230,81,0,0.15); }
-
-  .hdr-btn {
-    display: flex; align-items: center; gap: 5px;
-    font-size: 12px; padding: 5px 12px; border-radius: var(--radius-sm);
-    border: 1px solid var(--border-strong); background: transparent;
-    color: var(--ink-soft); cursor: pointer; font-family: 'DM Sans', sans-serif;
-    transition: all 0.12s; white-space: nowrap;
-  }
-  .hdr-btn:hover { background: var(--surface-alt); color: var(--ink); }
-  .hdr-btn.copied { background: var(--green-light); color: var(--green); border-color: var(--green); }
+  .meta-chip.hot { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
   /* ── URGENCY BANNER ── */
   .urgency-banner {
-    background: var(--coral-light); border-bottom: 1px solid rgba(201,79,53,0.2);
-    padding: 0.75rem 2rem;
+    background: var(--card-bg); border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0.85rem 2rem;
   }
 
-  body.dark .urgency-banner { background: rgba(201,79,53,0.08); border-color: rgba(201,79,53,0.2); }
-
   .urgency-inner {
-    max-width: 1100px; margin: 0 auto;
+    max-width: 1140px; margin: 0 auto;
     display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
   }
 
   .urgency-label {
-    font-size: 11px; font-weight: 500; padding: 3px 8px; border-radius: 6px;
-    background: var(--coral); color: white; white-space: nowrap; flex-shrink: 0;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 500; color: var(--accent);
+    letter-spacing: 0.14em; text-transform: uppercase; white-space: nowrap;
+    padding: 3px 8px; border-radius: 6px;
+    background: var(--accent-light); border: 1px solid var(--accent);
   }
 
   .urgency-items { display: flex; gap: 1.5rem; flex-wrap: wrap; }
 
   .urgency-item {
     font-size: 12px; color: var(--ink-mid);
-    display: flex; align-items: center; gap: 5px;
-  }
-
-  .urgency-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--coral); flex-shrink: 0; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
-
-  /* ── PAGE HERO ── */
-  .page-hero {
-    background: linear-gradient(135deg, #0f1f3d 0%, #1a2f5a 100%);
-    padding: 3rem 2rem 2.5rem;
-  }
-
-  .page-hero-inner { max-width: 1100px; margin: 0 auto; }
-
-  .hero-breadcrumb {
-    font-size: 12px; color: #7a9cc8; margin-bottom: 1rem;
     display: flex; align-items: center; gap: 6px;
   }
-  .hero-breadcrumb a { color: #a8c4e8; text-decoration: none; }
-  .hero-breadcrumb a:hover { color: #ffffff; }
 
-  .page-hero h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 400;
-    color: #ffffff; line-height: 1.1; margin-bottom: 0.75rem;
-  }
-
-  .page-hero h1 em { font-style: italic; color: #a8c4e8; }
-
-  .page-hero-desc {
-    font-size: 15px; color: #a8c4e8; line-height: 1.75;
-    max-width: 680px; margin-bottom: 1.5rem;
-  }
-
-  .hero-meta { display: flex; flex-wrap: wrap; gap: 8px; }
-
-  .meta-chip {
-    font-size: 11px; padding: 4px 10px; border-radius: 12px;
-    border: 1px solid rgba(255,255,255,0.15); color: #a8c4e8;
-    font-weight: 400;
-  }
-
-  .meta-chip.hot { background: rgba(201,79,53,0.3); color: #ffb3a0; border-color: rgba(201,79,53,0.4); }
+  .urgency-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; animation: blink 2s infinite; }
 
   /* ── MAIN ── */
-  .main { max-width: 1100px; margin: 0 auto; padding: 1.5rem 2rem 3rem; }
+  .main { max-width: 1140px; margin: 0 auto; padding: 2rem; }
 
   /* ── STAT STRIP ── */
   .stat-strip {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
-    gap: 12px; margin-bottom: 1.5rem; margin-top: 1.5rem;
-  }
-
-  .stat-card {
-    background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 1rem 1.25rem; box-shadow: var(--shadow);
-  }
-
-  .stat-label { font-size: 11px; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.06em; font-weight: 500; margin-bottom: 6px; }
-  .stat-val { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--coral); line-height: 1; }
-  .stat-sub { font-size: 11px; color: var(--ink-faint); margin-top: 4px; }
-
-  /* ── SEARCH ── */
-  .search-wrap { margin-bottom: 1.5rem; position: relative; }
-  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--ink-faint); pointer-events: none; }
-  #search-input {
-    width: 100%; padding: 9px 12px 9px 34px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px; background: var(--border);
     border: 1px solid var(--border); border-radius: var(--radius);
-    background: var(--card-bg); color: var(--ink);
-    font-family: 'DM Sans', sans-serif; font-size: 13px; outline: none;
-    transition: border-color 0.15s, box-shadow 0.15s;
+    overflow: hidden; margin-bottom: 2rem;
   }
-  #search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,102,204,0.1); }
-  #search-input::placeholder { color: var(--ink-faint); }
-  .search-results {
-    position: absolute; top: calc(100% + 4px); left: 0; right: 0;
-    background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: var(--radius); box-shadow: var(--shadow-md);
-    z-index: 200; display: none; max-height: 300px; overflow-y: auto;
-  }
-  .search-results.visible { display: block; }
-  .sr-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--border); cursor: pointer; text-decoration: none; transition: background 0.1s; }
-  .sr-item:last-child { border-bottom: none; }
-  .sr-item:hover { background: var(--surface-alt); }
-  .sr-type { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 6px; background: var(--accent-light); color: var(--accent); white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
-  .sr-title { font-size: 13px; color: var(--ink); line-height: 1.4; }
-  .sr-desc { font-size: 11px; color: var(--ink-faint); margin-top: 1px; }
-  .search-empty { padding: 14px; font-size: 13px; color: var(--ink-faint); text-align: center; }
+
+  .stat-item { background: var(--card-bg); padding: 1.25rem 1.5rem; }
+  .stat-val { font-family: 'DM Serif Display', serif; font-size: 2rem; color: var(--accent); line-height: 1; }
+  .stat-label { font-size: 11px; color: var(--ink-soft); margin-top: 5px; line-height: 1.4; }
 
   /* ── TABS ── */
   .tab-bar {
     display: flex; gap: 4px; margin-bottom: 1.5rem;
     background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 5px; box-shadow: var(--shadow); flex-wrap: wrap;
+    border-radius: var(--radius); padding: 5px;
+    flex-wrap: wrap;
   }
+
   .tab-btn {
     padding: 7px 16px; border-radius: var(--radius-sm); border: none;
     background: transparent; font-family: 'DM Sans', sans-serif;
     font-size: 13px; font-weight: 400; color: var(--ink-soft);
     cursor: pointer; transition: all 0.15s; white-space: nowrap;
   }
-  .tab-btn:hover { background: var(--surface-alt); color: var(--ink); }
-  .tab-btn.active { background: var(--ink); color: var(--white); font-weight: 500; }
+
+  .tab-btn:hover { background: rgba(238,237,240,0.05); color: var(--ink); }
+  .tab-btn.active { background: var(--accent); color: var(--ink); font-weight: 500; }
+
   .section { display: none; }
   .section.active { display: block; }
 
   /* ── GRIDS ── */
-  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 16px; margin-bottom: 16px; }
-  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 16px; margin-bottom: 16px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-bottom: 16px; }
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 16px; }
 
   /* ── CARDS ── */
   .card {
     background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 1.25rem 1.5rem; box-shadow: var(--shadow);
-  }
-  .card-title {
-    font-size: 11px; font-weight: 500; color: var(--ink-faint);
-    text-transform: uppercase; letter-spacing: 0.07em;
-    margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border);
-  }
-
-  /* ── VISA TRACKER CARDS ── */
-  .visa-card {
-    background: var(--card-bg); border: 1px solid var(--border);
-    border-left: 3px solid var(--vc-color, var(--accent));
     border-radius: var(--radius); padding: 1.25rem 1.5rem;
-    box-shadow: var(--shadow); margin-bottom: 12px;
   }
-  .visa-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
-  .visa-name { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.3; }
-  .visa-status {
-    font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 8px; white-space: nowrap; flex-shrink: 0;
-  }
-  .status-critical { background: var(--coral-light); color: var(--coral); }
-  .status-changed { background: var(--amber-light); color: var(--amber); }
-  .status-monitor { background: var(--accent-light); color: var(--accent); }
-  .status-stable { background: var(--green-light); color: var(--green); }
 
-  .visa-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.65; margin-bottom: 10px; }
-  .visa-meta { display: flex; flex-wrap: wrap; gap: 6px; }
-  .visa-tag { font-size: 10px; padding: 2px 7px; border-radius: 7px; background: var(--surface-alt); color: var(--ink-soft); border: 1px solid var(--border); }
+  .card-title {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px; font-weight: 500; color: var(--ink-faint);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 1rem; padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
 
   /* ── SOURCE ROWS ── */
   .source-row { display: flex; align-items: center; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); }
   .source-row:last-child { border-bottom: none; }
+
   .source-icon { width: 34px; height: 34px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
   .source-info { flex: 1; min-width: 0; }
   .source-name { font-size: 13px; font-weight: 500; color: var(--ink); }
   .source-desc { font-size: 12px; color: var(--ink-soft); margin-top: 1px; }
+
   .source-name a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; transition: all 0.12s; }
   .source-name a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+
   .freq-badge { font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 10px; white-space: nowrap; flex-shrink: 0; }
-  .freq-daily { background: var(--teal-light); color: var(--teal); }
-  .freq-weekly { background: var(--accent-light); color: var(--accent); }
-  .freq-monthly { background: var(--amber-light); color: var(--amber); }
-  .freq-breaking { background: var(--coral-light); color: var(--coral); }
+  .freq-daily { background: rgba(78,205,196,0.1); color: var(--teal); }
+  .freq-weekly { background: rgba(96,165,250,0.1); color: var(--blue); }
+  .freq-monthly { background: rgba(0,102,204,0.1); color: var(--accent); }
+  .freq-breaking { background: var(--accent-light); color: var(--accent); }
 
   /* ── PILL ── */
   .pill {
@@ -281,22 +257,36 @@
     border: 1px solid var(--border-strong); color: var(--ink-mid);
     cursor: pointer; transition: all 0.15s; text-decoration: none; display: inline-block;
   }
-  .pill:hover { background: var(--ink); color: var(--white); border-color: var(--ink); }
+  .pill:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
-  /* ── CHECKLIST ── */
-  .checklist-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
-  .checklist-item:last-child { border-bottom: none; }
-  .check-priority { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 6px; flex-shrink: 0; margin-top: 2px; white-space: nowrap; }
-  .p-critical { background: var(--coral-light); color: var(--coral); }
-  .p-high { background: var(--amber-light); color: var(--amber); }
-  .p-medium { background: var(--accent-light); color: var(--accent); }
-  .check-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
-  .check-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+  /* ── REGULATION CARDS ── */
+  .reg-card {
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.25rem 1.5rem;
+    border-left: 3px solid var(--reg-color, var(--accent));
+    margin-bottom: 12px;
+  }
 
-  /* ── RHYTHM ── */
+  .reg-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .reg-name { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.3; }
+  .reg-status {
+    font-size: 10px; font-weight: 500; padding: 3px 8px; border-radius: 8px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .status-live { background: rgba(110,231,183,0.1); color: var(--green); }
+  .status-imminent { background: var(--accent-light); color: var(--accent); }
+  .status-upcoming { background: rgba(0,102,204,0.1); color: var(--accent); }
+  .status-proposed { background: rgba(167,139,250,0.1); color: var(--violet); }
+
+  .reg-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 10px; }
+
+  .reg-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+  .reg-tag { font-size: 10px; padding: 2px 7px; border-radius: 7px; background: rgba(238,237,240,0.04); color: var(--ink-soft); border: 1px solid var(--border); }
+
+  /* ── RHYTHM ROWS ── */
   .rhythm-row { display: flex; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
   .rhythm-row:last-child { border-bottom: none; }
-  .rhythm-when { font-size: 11px; font-weight: 500; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.05em; min-width: 80px; padding-top: 2px; flex-shrink: 0; }
+  .rhythm-when { font-family: 'DM Sans', sans-serif; font-size: 11px; font-weight: 500; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.05em; min-width: 80px; padding-top: 2px; flex-shrink: 0; }
   .rhythm-what { font-size: 13px; color: var(--ink); line-height: 1.5; }
   .rhythm-src { font-size: 11px; color: var(--ink-faint); margin-top: 3px; }
 
@@ -307,47 +297,76 @@
   .brief-text { font-size: 13px; color: var(--ink); flex: 1; line-height: 1.4; transition: color 0.12s; }
   .brief-arrow { font-size: 13px; color: var(--ink-faint); }
 
+  /* ── CHECKLIST ── */
+  .checklist-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--border); align-items: flex-start; }
+  .checklist-item:last-child { border-bottom: none; }
+  .check-box { width: 18px; height: 18px; border-radius: 4px; border: 1px solid var(--border-strong); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; }
+  .check-priority { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 6px; flex-shrink: 0; margin-top: 2px; white-space: nowrap; font-family: 'DM Sans', sans-serif; }
+  .p-critical { background: var(--accent-light); color: var(--accent); }
+  .p-high { background: rgba(0,102,204,0.1); color: var(--accent); }
+  .p-medium { background: rgba(96,165,250,0.1); color: var(--blue); }
+  .check-content { flex: 1; }
+  .check-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 3px; }
+  .check-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+
   /* ── LIVE FEED ── */
-  .live-feed-panel {
-    background: var(--card-bg); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 1.25rem 1.5rem;
-    box-shadow: var(--shadow); margin-top: 16px;
-  }
+  .live-feed-panel { background: var(--card-bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 16px; }
   .feed-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem; padding-bottom: 0.6rem; border-bottom: 1px solid var(--border); }
-  .feed-title { font-size: 11px; font-weight: 500; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.07em; }
-  .live-dot { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--teal); font-weight: 500; }
-  .live-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--teal); animation: pulse 2s infinite; }
+  .feed-title { font-family: 'DM Sans', sans-serif; font-size: 10px; font-weight: 500; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.1em; }
+  .live-dot { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--accent); font-weight: 500; font-family: 'DM Sans', sans-serif; }
+  .live-dot::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: blink 2s infinite; }
   .feed-tabs { display: flex; gap: 4px; margin-bottom: 1rem; flex-wrap: wrap; }
-  .feed-tab { font-size: 11px; padding: 4px 10px; border-radius: 12px; border: 1px solid var(--border); background: transparent; color: var(--ink-soft); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.12s; }
-  .feed-tab.active { background: var(--ink); color: var(--white); border-color: var(--ink); }
-  .feed-tab:hover:not(.active) { background: var(--surface-alt); }
+  .feed-tab { font-size: 11px; padding: 4px 10px; border-radius: 10px; border: 1px solid var(--border); background: transparent; color: var(--ink-soft); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.12s; }
+  .feed-tab.active { background: var(--accent); color: var(--ink); border-color: var(--accent); font-weight: 500; }
+  .feed-tab:hover:not(.active) { background: rgba(238,237,240,0.05); color: var(--ink); }
   .feed-list { min-height: 180px; }
   .feed-item { display: flex; flex-direction: column; gap: 3px; padding: 10px 0; border-bottom: 1px solid var(--border); text-decoration: none; transition: all 0.12s; }
   .feed-item:last-child { border-bottom: none; }
   .feed-item:hover .feed-item-title { color: var(--accent); }
-  .feed-item-source { font-size: 10px; font-weight: 500; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; }
+  .feed-item-source { font-size: 10px; font-weight: 500; color: var(--ink-faint); text-transform: uppercase; letter-spacing: 0.06em; font-family: 'DM Sans', sans-serif; }
   .feed-item-title { font-size: 13px; color: var(--ink); line-height: 1.4; transition: color 0.12s; }
   .feed-item-date { font-size: 11px; color: var(--ink-faint); }
   .feed-loading { display: flex; align-items: center; justify-content: center; height: 100px; font-size: 13px; color: var(--ink-faint); }
   .feed-error { font-size: 12px; color: var(--ink-faint); padding: 12px 0; text-align: center; }
-  .feed-footer-note { margin-top: 10px; font-size: 11px; color: var(--ink-faint); }
+  .feed-footer-note { margin-top: 10px; font-size: 11px; color: var(--ink-faint); font-family: 'DM Sans', sans-serif; }
+
+  /* ── SEARCH ── */
+  .search-wrap { margin-bottom: 1.5rem; position: relative; }
+  .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--ink-faint); font-size: 13px; pointer-events: none; }
+  #search-input {
+    width: 100%; padding: 9px 12px 9px 34px;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--card-bg); color: var(--ink);
+    font-family: 'DM Sans', sans-serif; font-size: 13px;
+    outline: none; transition: border-color 0.15s;
+  }
+  #search-input:focus { border-color: var(--accent); }
+  #search-input::placeholder { color: var(--ink-faint); }
+  .search-results { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: var(--surface-alt); border: 1px solid var(--border-strong); border-radius: var(--radius); z-index: 200; display: none; max-height: 300px; overflow-y: auto; }
+  .search-results.visible { display: block; }
+  .sr-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border-bottom: 1px solid var(--border); cursor: pointer; text-decoration: none; transition: background 0.1s; }
+  .sr-item:last-child { border-bottom: none; }
+  .sr-item:hover { background: rgba(238,237,240,0.04); }
+  .sr-type { font-size: 10px; font-weight: 500; padding: 2px 6px; border-radius: 6px; background: var(--accent-light); color: var(--accent); white-space: nowrap; flex-shrink: 0; margin-top: 2px; font-family: 'DM Sans', sans-serif; }
+  .sr-title { font-size: 13px; color: var(--ink); line-height: 1.4; }
+  .sr-desc { font-size: 11px; color: var(--ink-faint); margin-top: 1px; }
+  .search-empty { padding: 14px; font-size: 13px; color: var(--ink-faint); text-align: center; }
+
+  /* ── SHARE BTN ── */
+  .hdr-btn { display: flex; align-items: center; gap: 5px; font-size: 12px; padding: 5px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border-strong); background: transparent; color: var(--ink-soft); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.12s; white-space: nowrap; text-decoration: none; }
+  .hdr-btn:hover { color: var(--ink); background: rgba(238,237,240,0.05); }
+  .hdr-btn.copied { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
   /* ── FOOTER ── */
-  .site-footer { border-top: 1px solid var(--border); background: var(--header-bg); padding: 1.25rem 2rem; margin-top: 3rem; }
-  .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; }
-  .footer-left { font-size: 12px; color: var(--ink-faint); }
-  .footer-right { display: flex; gap: 14px; flex-wrap: wrap; }
+  footer { border-top: 1px solid var(--border); background: var(--card-bg); padding: 2rem; margin-top: 3rem; }
+  .footer-inner { max-width: 1140px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+  .footer-left { font-size: 12px; color: var(--ink-faint); font-family: 'DM Sans', sans-serif; }
+  .footer-right { display: flex; gap: 12px; flex-wrap: wrap; }
   .footer-link { font-size: 12px; color: var(--ink-soft); text-decoration: none; transition: color 0.12s; }
   .footer-link:hover { color: var(--accent); }
 
-  /* ── PRINT ── */
-  @media print {
-    .site-header, .search-wrap, .tab-bar, .live-feed-panel, .hdr-btn, .site-footer { display: none !important; }
-    .section { display: block !important; }
-    body { background: white; }
-    .card { box-shadow: none; }
-  }
 
+  
 
   /* ── SIGNAL ALERT BANNER ── */
   .signal-alert-banner {
@@ -383,14 +402,14 @@
   }
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .header-inner { flex-wrap: wrap; }
+    .nav-links { display: none; }
     .urgency-items { gap: 0.75rem; }
   }
   @media (max-width: 640px) {
     .main { padding: 1rem; }
-    .stat-strip { grid-template-columns: repeat(2,1fr); }
+    .page-hero { padding: 3rem 1.25rem 2rem; }
     .tab-btn { font-size: 12px; padding: 6px 10px; }
-    .page-hero { padding: 2rem 1.25rem 1.75rem; }
+    .stat-strip { grid-template-columns: repeat(2, 1fr); }
   }
 
   /* ── DESIGN REFRESH v2 — typography, contrast, mobile ── */
@@ -501,20 +520,22 @@
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="site-header">
-  <div class="header-inner">
-    <div class="header-left">
+<div class="site-wrap">
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div style="display:flex; align-items:center; gap:14px;">
       <a href="https://agentforchange-hr-tech.github.io/the-signal" class="nav-back">← The Signal</a>
-      <div class="divider-v"></div>
-      <div class="header-title">
-        <h1>Immigration Intelligence</h1>
-        <div class="subtitle">The Signal · Workforce Mobility</div>
-      </div>
+      <a href="#" class="nav-logo">THE SIGNAL</a>
+      <span class="nav-domain">Risk & Compliance</span>
     </div>
-    <div class="header-actions">
-      <span class="badge badge-orange">🔴 High Urgency</span>
-      <span style="font-size:11px; color:var(--ink-faint);" id="live-date"></span>
+    <div class="nav-right">
+      <div class="nav-links">
+        <a href="#regulations" class="nav-link">Regulations</a>
+        <a href="#sources" class="nav-link">Sources</a>
+        <a href="#checklist" class="nav-link">Checklist</a>
+      </div>
       <button class="hdr-btn" id="share-btn" onclick="copyLink()">
         <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="13" cy="2.5" r="1.5"/><circle cx="13" cy="13.5" r="1.5"/><circle cx="3" cy="8" r="1.5"/><line x1="4.4" y1="7.2" x2="11.6" y2="3.3"/><line x1="4.4" y1="8.8" x2="11.6" y2="12.7"/></svg>
         Share
@@ -523,17 +544,17 @@
       <button class="hdr-btn" id="dark-toggle" onclick="toggleDark()">Dark</button>
     </div>
   </div>
-</header>
+</nav>
 
 <!-- URGENCY BANNER -->
 <div class="urgency-banner">
   <div class="urgency-inner">
     <span class="urgency-label">Active Now</span>
     <div class="urgency-items">
-      <span class="urgency-item"><span class="urgency-dot"></span>$100K H-1B supplemental fee — in effect Sep 21, 2025</span>
-      <span class="urgency-item"><span class="urgency-dot"></span>Wage-weighted H-1B lottery — effective Feb 27, 2026</span>
-      <span class="urgency-item"><span class="urgency-dot"></span>EAD auto-extension eliminated — Oct 30, 2025</span>
-      <span class="urgency-item"><span class="urgency-dot"></span>Social media vetting — all H-1B/H-4 applicants</span>
+      <span class="urgency-item"><span class="urgency-dot"></span>Colorado AI Act — compliance deadline Jun 30, 2026</span>
+      <span class="urgency-item"><span class="urgency-dot"></span>EU AI Act high-risk systems — Aug 2, 2026</span>
+      <span class="urgency-item"><span class="urgency-dot"></span>Illinois HB 3773 — in effect Jan 1, 2026</span>
+      <span class="urgency-item"><span class="urgency-dot"></span>California ADS regulations — in effect Oct 1, 2025</span>
     </div>
   </div>
 </div>
@@ -544,17 +565,17 @@
     <div class="hero-breadcrumb">
       <a href="https://agentforchange-hr-tech.github.io/the-signal">The Signal</a>
       <span>›</span>
-      <span>Immigration</span>
+      <span>Risk & Compliance</span>
     </div>
-    <h1>Workforce Mobility &<br><em>Visa Intelligence</em></h1>
+    <h1>AI Regulation &<br><em>Legal Exposure</em></h1>
     <p class="page-hero-desc">
-      The 2025–2026 immigration environment represents the most significant shift in employer-sponsored visas in decades. A $100,000 H-1B fee, wage-weighted lottery, eliminated EAD auto-extensions, and expanded FDNS enforcement have transformed immigration from an administrative function into a core workforce planning and financial risk issue — especially for tech companies competing for specialized engineering talent.
+      The legal landscape governing AI in HR is evolving faster than most compliance teams can track. From the EU AI Act to a patchwork of US state laws, employers face a complex, overlapping set of obligations around bias audits, transparency, human oversight, and data governance — with enforcement already underway.
     </p>
     <div class="hero-meta">
-      <span class="meta-chip hot">🔴 Critical Changes Active</span>
+      <span class="meta-chip hot">🔴 High Urgency</span>
       <span class="meta-chip">Updated <span id="hero-date"></span></span>
-      <span class="meta-chip">14 Sources tracked</span>
-      <span class="meta-chip">H-1B · L-1 · OPT/EAD · PERM · I-9</span>
+      <span class="meta-chip">12 Sources tracked</span>
+      <span class="meta-chip">5 Active regulations</span>
     </div>
   </div>
 </div>
@@ -562,152 +583,156 @@
 <!-- MAIN -->
 <main class="main">
 
-  <!-- STATS -->
-  <div class="stat-strip">
-    <div class="stat-card">
-      <div class="stat-label">New H-1B fee</div>
-      <div class="stat-val">$100K</div>
-      <div class="stat-sub">Per petition — up from ~$700–$1,500</div>
+  <!-- STAT STRIP -->
+  <div class="stat-strip" style="margin-top:1.5rem;">
+    <div class="stat-item">
+      <div class="stat-val">5</div>
+      <div class="stat-label">Active or imminent AI hiring laws</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-label">H-1B annual cap</div>
-      <div class="stat-val">65K</div>
-      <div class="stat-sub">+20K for US advanced degree holders</div>
+    <div class="stat-item">
+      <div class="stat-val">€35M</div>
+      <div class="stat-label">Max EU AI Act fine (or 7% global revenue)</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-label">Bank H-1B filings</div>
-      <div class="stat-val">−10%</div>
-      <div class="stat-sub">FY2026 Q1 vs prior year — fee impact</div>
+    <div class="stat-item">
+      <div class="stat-val">76%</div>
+      <div class="stat-label">Enterprises using AI in HR without formal compliance prep</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-label">EAD max validity</div>
-      <div class="stat-val">18mo</div>
-      <div class="stat-sub">Reduced from 5 years for most categories</div>
+    <div class="stat-item">
+      <div class="stat-val">87%</div>
+      <div class="stat-label">Companies using AI somewhere in recruiting</div>
     </div>
-    <div class="stat-card">
-      <div class="stat-label">FDNS audits</div>
-      <div class="stat-val">+48%</div>
-      <div class="stat-sub">Jump in DOL probes — Project Firewall</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-label">Fee expiry</div>
-      <div class="stat-val">Sep 26</div>
-      <div class="stat-sub">$100K fee expires Sep 2026 unless extended</div>
+    <div class="stat-item">
+      <div class="stat-val">4yr</div>
+      <div class="stat-label">California data retention requirement for ADS records</div>
     </div>
   </div>
 
   <!-- SEARCH -->
   <div class="search-wrap">
     <span class="search-icon">🔍</span>
-    <input type="text" id="search-input" placeholder="Search visa types, policies, sources, compliance topics…" oninput="runSearch(this.value)" onblur="setTimeout(()=>closeSearch(),200)">
+    <input type="text" id="search-input" placeholder="Search regulations, sources, frameworks, compliance topics…" oninput="runSearch(this.value)" onblur="setTimeout(()=>closeSearch(),200)">
     <div class="search-results" id="search-results"></div>
   </div>
 
-  <!-- TABS -->
+  <!-- TAB BAR -->
   <div class="tab-bar">
-    <button class="tab-btn active" onclick="showTab('tracker', this)">Policy Tracker</button>
+    <button class="tab-btn active" onclick="showTab('regulations', this)">Regulation Tracker</button>
     <button class="tab-btn" onclick="showTab('sources', this)">Sources & Feeds</button>
-    <button class="tab-btn" onclick="showTab('checklist', this)">Employer Checklist</button>
+    <button class="tab-btn" onclick="showTab('checklist', this)">Compliance Checklist</button>
     <button class="tab-btn" onclick="showTab('rhythm', this)">Monitoring Rhythm</button>
-    <button class="tab-btn" onclick="showTab('visas', this)">Visa Quick Reference</button>
     <button class="tab-btn" onclick="showTab('leaders', this)">Key Voices</button>
   </div>
 
-  <!-- TAB: POLICY TRACKER -->
-  <div id="tracker" class="section active">
+  <!-- TAB: REGULATIONS -->
+  <div id="regulations" class="section active">
     <div style="margin-bottom:1rem;">
-      <p style="font-size:13px; color:var(--ink-soft); line-height:1.7;">Active and recent policy changes as of <span id="policy-date"></span>. This tracker covers employer-facing immigration changes with direct impact on hiring, workforce planning, and compliance. <em style="color:var(--coral);">Not legal advice — consult qualified immigration counsel for your specific situation.</em></p>
+      <p style="font-size:13px; color:var(--ink-soft); line-height:1.7;">The regulatory landscape as of <span id="reg-date"></span>. This tracker covers US federal, US state, and EU regulations directly impacting how employers design, deploy, and govern AI in HR and recruiting systems. <em style="color:var(--accent);">This does not constitute legal advice — consult qualified employment counsel for your specific situation.</em></p>
     </div>
 
-    <div class="card-title">H-1B Program — Major Changes Active</div>
+    <!-- US STATE LAWS -->
+    <div class="card-title" style="font-family:'DM Sans',monospace; font-size:10px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; margin-bottom:1rem;">US State Laws</div>
 
-    <div class="visa-card" style="--vc-color:var(--coral);">
-      <div class="visa-header">
-        <div class="visa-name">$100,000 Supplemental H-1B Fee</div>
-        <span class="visa-status status-critical">● Active Sep 21, 2025</span>
+    <div class="reg-card" style="--reg-color:var(--coral);">
+      <div class="reg-header">
+        <div class="reg-name">California Civil Rights Council — ADS Regulations</div>
+        <span class="reg-status status-live">● Live</span>
       </div>
-      <p class="visa-desc">Presidential Proclamation requires employers to pay a $100,000 supplemental fee per H-1B petition for beneficiaries outside the US or requiring consular processing. Must be paid via pay.gov before filing Form I-129 — failure results in automatic denial. Exemptions include F-1 status changes, extensions, amendments, and transfers for workers already in the US. Fee expires September 2026 unless extended. Multiple legal challenges filed; courts have declined to block it. Employers must plan as if it will remain in effect.</p>
-      <div class="visa-meta">
-        <span class="visa-tag">Active now</span>
-        <span class="visa-tag">Pay via pay.gov before filing</span>
-        <span class="visa-tag">Extensions exempt</span>
-        <span class="visa-tag">Legal challenge pending</span>
-        <span class="visa-tag">Sep 2026 expiry</span>
-      </div>
-    </div>
-
-    <div class="visa-card" style="--vc-color:var(--coral);">
-      <div class="visa-header">
-        <div class="visa-name">Wage-Weighted H-1B Lottery</div>
-        <span class="visa-status status-critical">● Effective Feb 27, 2026</span>
-      </div>
-      <p class="visa-desc">Replaces the random H-1B lottery with a wage-weighted selection process for FY2027 cap season. Higher-wage applicants receive greater selection probability — Level 1 entries counted once, Level 2 twice, Level 3 three times, Level 4 four times. Favors senior, higher-paid hires. Disadvantages entry-level and mid-level recruiting and smaller employers who cannot match large tech company salaries. Effective for the FY2027 H-1B cap registration season beginning March 2026.</p>
-      <div class="visa-meta">
-        <span class="visa-tag">Effective Feb 27, 2026</span>
-        <span class="visa-tag">FY2027 cap season</span>
-        <span class="visa-tag">Wage-level weighting</span>
-        <span class="visa-tag">Favors senior hires</span>
-        <span class="visa-tag">USCIS final rule</span>
+      <p class="reg-desc">Effective October 1, 2025. Extends California's anti-discrimination laws to automated decision systems (ADS) in employment. Requires meaningful human oversight with override capability, proactive bias testing, 4-year data retention, and vendor liability under agency principles.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Effective Oct 2025</span>
+        <span class="reg-tag">Bias testing required</span>
+        <span class="reg-tag">4yr data retention</span>
+        <span class="reg-tag">Vendor liability</span>
+        <span class="reg-tag">Human oversight</span>
       </div>
     </div>
 
-    <div class="visa-card" style="--vc-color:var(--amber);">
-      <div class="visa-header">
-        <div class="visa-name">Social Media Vetting — All H-1B & H-4 Applicants</div>
-        <span class="visa-status status-changed">⚡ Active Dec 15, 2025</span>
+    <div class="reg-card" style="--reg-color:var(--coral);">
+      <div class="reg-header">
+        <div class="reg-name">Illinois HB 3773 — AI in Employment Decisions</div>
+        <span class="reg-status status-live">● Live</span>
       </div>
-      <p class="visa-desc">As of December 15, 2025, all H-1B and H-4 visa applicants are subject to mandatory social media vetting — regardless of nationality. Applicants must set social media profiles to public. Consular officers review résumés, LinkedIn pages, and trade publication articles. Includes dependents on H-4 visas. Expect longer processing times for visa stamping. Employers should notify affected employees, update travel policies, and plan for potential extended absences abroad.</p>
-      <div class="visa-meta">
-        <span class="visa-tag">Active Dec 15, 2025</span>
-        <span class="visa-tag">All nationalities</span>
-        <span class="visa-tag">Includes H-4 dependents</span>
-        <span class="visa-tag">LinkedIn reviewed</span>
-        <span class="visa-tag">Longer processing times</span>
-      </div>
-    </div>
-
-    <div class="visa-card" style="--vc-color:var(--amber);">
-      <div class="visa-header">
-        <div class="visa-name">EAD Auto-Extension Eliminated</div>
-        <span class="visa-status status-changed">⚡ Active Oct 30, 2025</span>
-      </div>
-      <p class="visa-desc">The 540-day automatic extension for timely EAD renewal filings has been eliminated for most categories as of October 30, 2025. Employees lose work authorization the day after their EAD expires unless a new card has been issued — they cannot work until the new EAD is received. Maximum EAD validity also reduced to 18 months (from 5 years) for refugees, asylees, adjustment of status applicants, and others. Employers must proactively track EAD expirations and begin renewal processes significantly earlier than before.</p>
-      <div class="visa-meta">
-        <span class="visa-tag">Active Oct 30, 2025</span>
-        <span class="visa-tag">No auto-extension</span>
-        <span class="visa-tag">18mo max validity</span>
-        <span class="visa-tag">Track expirations proactively</span>
-        <span class="visa-tag">Work gap risk</span>
+      <p class="reg-desc">Effective January 1, 2026. Amends the Illinois Human Rights Act to prohibit discriminatory AI use in hiring, promotion, discipline, and termination. Requires advance notice to applicants when AI influences covered employment decisions. Employers remain responsible for AI outcomes even from third-party vendors.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Effective Jan 2026</span>
+        <span class="reg-tag">Notice required</span>
+        <span class="reg-tag">Anti-discrimination</span>
+        <span class="reg-tag">Vendor accountability</span>
       </div>
     </div>
 
-    <div class="card-title" style="margin-top:1.5rem;">Enforcement & Compliance</div>
-
-    <div class="visa-card" style="--vc-color:var(--coral);">
-      <div class="visa-header">
-        <div class="visa-name">Project Firewall — Expanded FDNS Enforcement</div>
-        <span class="visa-status status-critical">● Active & Escalating</span>
+    <div class="reg-card" style="--reg-color:#fb923c;">
+      <div class="reg-header">
+        <div class="reg-name">Colorado AI Act (SB 24-205)</div>
+        <span class="reg-status status-imminent">⚡ Jun 30, 2026</span>
       </div>
-      <p class="visa-desc">48% jump in Department of Labor probes targeting H-1B fraud and compliance. FDNS (Fraud Detection and National Security) site visits significantly expanded. Employers must ensure job duties in petitions accurately reflect real-world responsibilities, wage levels match actual compensation, worksites and supervisory structures are correctly documented, and third-party placements are properly monitored. Non-compliant employers face penalties, revocations, and debarment from the H-1B program.</p>
-      <div class="visa-meta">
-        <span class="visa-tag">+48% DOL probes</span>
-        <span class="visa-tag">FDNS site visits up</span>
-        <span class="visa-tag">Job duty accuracy critical</span>
-        <span class="visa-tag">Third-party placement scrutiny</span>
+      <p class="reg-desc">One of the most comprehensive US state AI laws. Regulates "high-risk" AI in employment decisions — hiring, firing, promotion. Requires annual impact assessments, transparency when AI is used, and foreseeable risk disclosures. Currently subject to federal legal challenge by DOJ and xAI, but compliance preparation is advised regardless. Violations constitute unfair trade practice.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Deadline Jun 30, 2026</span>
+        <span class="reg-tag">Annual impact assessment</span>
+        <span class="reg-tag">High-risk classification</span>
+        <span class="reg-tag">Under legal challenge</span>
+        <span class="reg-tag">Unfair trade practice</span>
       </div>
     </div>
 
-    <div class="visa-card" style="--vc-color:var(--accent);">
-      <div class="visa-header">
-        <div class="visa-name">H-1B & L-1 Visa Reform Act of 2025 (Proposed)</div>
-        <span class="visa-status status-monitor">◎ Monitor — Legislative</span>
+    <div class="reg-card" style="--reg-color:var(--accent);">
+      <div class="reg-header">
+        <div class="reg-name">Texas TRAIGA — Responsible AI Governance Act</div>
+        <span class="reg-status status-live">● Live</span>
       </div>
-      <p class="visa-desc">Proposed legislation would increase employer reporting and evidentiary requirements, raise penalties for violations, introduce annual DHS compliance audits, and tighten L-1 "specialized knowledge" definitions. L-1 authorization would be limited to one year unless employer demonstrates no US worker displacement. Not yet enacted — monitor progress as it may affect FY2027 and beyond planning.</p>
-      <div class="visa-meta">
-        <span class="visa-tag">Proposed — not enacted</span>
-        <span class="visa-tag">Annual DHS audits</span>
-        <span class="visa-tag">L-1 changes included</span>
-        <span class="visa-tag">Increased penalties</span>
+      <p class="reg-desc">Effective January 1, 2026. Requires developers and deployers of high-risk AI to use reasonable care to prevent algorithmic discrimination. Establishes a framework targeting discriminatory outcomes in employment, credit, and housing decisions.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Effective Jan 2026</span>
+        <span class="reg-tag">Anti-discrimination</span>
+        <span class="reg-tag">Developer & deployer liability</span>
+      </div>
+    </div>
+
+    <div class="reg-card" style="--reg-color:#a78bfa;">
+      <div class="reg-header">
+        <div class="reg-name">NYC Local Law 144 — Automated Employment Decision Tools</div>
+        <span class="reg-status status-live">● Live</span>
+      </div>
+      <p class="reg-desc">Requires independent annual bias audits before using automated employment decision tools to screen NYC candidates or employees. Employers must provide advance notice and disclose job qualifications the tool evaluates. Applies to tools that substantially assist or replace discretionary hiring decisions.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Annual bias audit</span>
+        <span class="reg-tag">Candidate notice</span>
+        <span class="reg-tag">NYC employers</span>
+        <span class="reg-tag">Third-party audit</span>
+      </div>
+    </div>
+
+    <!-- EU -->
+    <div class="card-title" style="font-family:'DM Sans',monospace; font-size:10px; letter-spacing:0.1em; color:var(--ink-faint); text-transform:uppercase; margin:1.5rem 0 1rem;">EU & Global</div>
+
+    <div class="reg-card" style="--reg-color:#60a5fa;">
+      <div class="reg-header">
+        <div class="reg-name">EU AI Act — High-Risk HR Systems</div>
+        <span class="reg-status status-imminent">⚡ Aug 2, 2026</span>
+      </div>
+      <p class="reg-desc">The world's first comprehensive AI regulation. AI used in recruitment, screening, selection, performance evaluation, or promotion is explicitly classified as high-risk under Annex III. Full compliance required by August 2, 2026. Extraterritorial reach — applies to any employer whose AI outputs affect EU candidates or employees, regardless of HQ location. Penalties up to €35M or 7% of global turnover.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Deadline Aug 2, 2026</span>
+        <span class="reg-tag">Extraterritorial reach</span>
+        <span class="reg-tag">Human oversight required</span>
+        <span class="reg-tag">Bias testing mandatory</span>
+        <span class="reg-tag">€35M max fine</span>
+        <span class="reg-tag">Worker notice required</span>
+      </div>
+    </div>
+
+    <div class="reg-card" style="--reg-color:#6ee7b7;">
+      <div class="reg-header">
+        <div class="reg-name">EU AI Act — Prohibited Practices (in effect)</div>
+        <span class="reg-status status-live">● Live Feb 2025</span>
+      </div>
+      <p class="reg-desc">Banned practices took effect February 2, 2025. Emotion recognition in the workplace is absolutely prohibited. Biometric categorization based on sensitive traits is banned. AI literacy obligations now require employers to train staff involved in AI operations on how AI works and governance responsibilities.</p>
+      <div class="reg-meta">
+        <span class="reg-tag">Emotion recognition banned</span>
+        <span class="reg-tag">Biometric categorization banned</span>
+        <span class="reg-tag">AI literacy required</span>
+        <span class="reg-tag">In effect now</span>
       </div>
     </div>
   </div>
@@ -717,145 +742,152 @@
     <div class="grid-2">
 
       <div class="card">
-        <div class="card-title">Immigration law firms — daily/weekly</div>
+        <div class="card-title">Legal & regulatory intelligence — daily/weekly</div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--accent-light);">⚖️</div>
+          <div class="source-icon" style="background:rgba(201,79,53,0.1);">⚖️</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://www.littler.com/practice-areas/immigration" target="_blank">Littler — Immigration Practice</a></div>
-            <div class="source-desc">Largest employment law firm — H-1B, L-1, I-9 employer guidance</div>
+            <div class="source-name"><a href="https://www.shrm.org/topics-tools/topics/employment-law-compliance" target="_blank">SHRM — Employment Law & Compliance</a></div>
+            <div class="source-desc">HR-focused legal updates, AI law summaries, compliance guidance</div>
+          </div>
+          <span class="freq-badge freq-daily">Daily</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(96,165,250,0.1);">📰</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.hrdive.com/topic/employment-law/" target="_blank">HR Dive — Employment Law</a></div>
+            <div class="source-desc">Breaking state and federal AI hiring law coverage</div>
+          </div>
+          <span class="freq-badge freq-daily">Daily</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(167,139,250,0.1);">🏛️</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.littler.com/publication-press/publication/workplace-policy-institute-insider" target="_blank">Littler — Workplace Policy Insider</a></div>
+            <div class="source-desc">Top employment law firm — AI regulation analysis and guidance</div>
           </div>
           <span class="freq-badge freq-weekly">Weekly</span>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--teal-light);">🏛️</div>
+          <div class="source-icon" style="background:rgba(110,231,183,0.1);">📋</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://fragomen.com/insights" target="_blank">Fragomen — Immigration Insights</a></div>
-            <div class="source-desc">World's largest immigration law firm — global mobility intelligence</div>
+            <div class="source-name"><a href="https://ogletree.com/insights-resources/blog-posts/" target="_blank">Ogletree Deakins Blog</a></div>
+            <div class="source-desc">Employment law firm — deep AI hiring compliance briefs</div>
           </div>
           <span class="freq-badge freq-weekly">Weekly</span>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--amber-light);">📋</div>
+          <div class="source-icon" style="background:rgba(0,102,204,0.1);">🌐</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://www.gibsondunn.com/practice/immigration" target="_blank">Gibson Dunn — Immigration</a></div>
-            <div class="source-desc">Corporate immigration counsel — H-1B policy and executive order analysis</div>
+            <div class="source-name"><a href="https://www.hrmorning.com/articles/category/compliance/" target="_blank">HR Morning — Compliance</a></div>
+            <div class="source-desc">Practical compliance news for HR practitioners</div>
           </div>
-          <span class="freq-badge freq-weekly">Weekly</span>
-        </div>
-        <div class="source-row">
-          <div class="source-icon" style="background:var(--coral-light);">🔍</div>
-          <div class="source-info">
-            <div class="source-name"><a href="https://www.theemployerreport.com" target="_blank">The Employer Report</a></div>
-            <div class="source-desc">Employment law blog — frequent employer immigration compliance updates</div>
-          </div>
-          <span class="freq-badge freq-weekly">Weekly</span>
+          <span class="freq-badge freq-daily">Daily</span>
         </div>
         <div style="margin-top:1rem;">
-          <a href="https://fragomen.com/insights" target="_blank" class="pill">Fragomen Insights →</a>
-          <a href="https://www.theemployerreport.com" target="_blank" class="pill" style="margin-top:6px;">Employer Report →</a>
+          <a href="https://www.shrm.org/topics-tools/topics/employment-law-compliance" target="_blank" class="pill">SHRM Compliance →</a>
+          <a href="https://www.hrdive.com/topic/employment-law/" target="_blank" class="pill" style="margin-top:6px;">HR Dive Law →</a>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">News & policy tracking — daily</div>
+        <div class="card-title">EU & international AI regulation</div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--accent-light);">📰</div>
+          <div class="source-icon" style="background:rgba(96,165,250,0.1);">🇪🇺</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://www.visaverge.com" target="_blank">VisaVerge</a></div>
-            <div class="source-desc">Breaking immigration news — H-1B trends, policy changes, employer impact</div>
+            <div class="source-name"><a href="https://artificialintelligenceact.eu" target="_blank">EU AI Act Tracker</a></div>
+            <div class="source-desc">The definitive independent tracker for EU AI Act developments and timelines</div>
           </div>
-          <span class="freq-badge freq-daily">Daily</span>
+          <span class="freq-badge freq-breaking">Breaking</span>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--teal-light);">🌐</div>
+          <div class="source-icon" style="background:rgba(167,139,250,0.1);">📜</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://immigrationimpact.com" target="_blank">Immigration Impact</a></div>
-            <div class="source-desc">American Immigration Council — policy analysis and employer impact</div>
+            <div class="source-name"><a href="https://iapp.org/news/topic/artificial-intelligence/" target="_blank">IAPP — AI Policy & Privacy</a></div>
+            <div class="source-desc">International Association of Privacy Professionals — GDPR + AI Act intersection</div>
           </div>
-          <span class="freq-badge freq-daily">Daily</span>
+          <span class="freq-badge freq-weekly">Weekly</span>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--amber-light);">⚡</div>
+          <div class="source-icon" style="background:rgba(201,79,53,0.1);">🔍</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://www.hrdive.com/topic/immigration/" target="_blank">HR Dive — Immigration</a></div>
-            <div class="source-desc">HR-focused immigration news — employer policy and workforce impact</div>
+            <div class="source-name"><a href="https://www.fieldfisher.com/en/insights?topic=employment" target="_blank">Fieldfisher Employment Law</a></div>
+            <div class="source-desc">EU employment law firm — AI Act HR compliance analysis</div>
           </div>
-          <span class="freq-badge freq-daily">Daily</span>
+          <span class="freq-badge freq-weekly">Weekly</span>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--green-light);">🔔</div>
+          <div class="source-icon" style="background:rgba(110,231,183,0.1);">⚙️</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://www.uscis.gov/newsroom" target="_blank">USCIS Newsroom</a></div>
-            <div class="source-desc">Official USCIS policy updates, fee changes, and program announcements</div>
+            <div class="source-name"><a href="https://www.nist.gov/artificial-intelligence" target="_blank">NIST AI Risk Management Framework</a></div>
+            <div class="source-desc">US federal AI governance framework — Map, Measure, Manage, Govern</div>
+          </div>
+          <span class="freq-badge freq-monthly">Quarterly</span>
+        </div>
+        <div style="margin-top:1rem;">
+          <a href="https://artificialintelligenceact.eu" target="_blank" class="pill">EU AI Act Tracker →</a>
+          <a href="https://iapp.org/news/topic/artificial-intelligence/" target="_blank" class="pill" style="margin-top:6px;">IAPP AI Policy →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Federal & EEOC watch</div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(0,102,204,0.1);">🏛️</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.eeoc.gov/artificial-intelligence" target="_blank">EEOC — AI in Employment</a></div>
+            <div class="source-desc">Federal guidance on AI and employment discrimination — monitor for policy changes under current administration</div>
           </div>
           <span class="freq-badge freq-breaking">Monitor</span>
         </div>
-        <div style="margin-top:1rem;">
-          <a href="https://www.visaverge.com" target="_blank" class="pill">VisaVerge →</a>
-          <a href="https://www.uscis.gov/newsroom" target="_blank" class="pill" style="margin-top:6px;">USCIS Newsroom →</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">I-9 & E-Verify compliance</div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--accent-light);">📋</div>
+          <div class="source-icon" style="background:rgba(96,165,250,0.1);">📊</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://www.uscis.gov/i-9-central" target="_blank">USCIS I-9 Central</a></div>
-            <div class="source-desc">Official I-9 resources — form updates, employer handbook, compliance guidance</div>
+            <div class="source-name"><a href="https://www.dol.gov/agencies/eta/ai" target="_blank">DOL — AI & Workforce</a></div>
+            <div class="source-desc">Department of Labor guidance on AI in workplace and hiring</div>
           </div>
           <span class="freq-badge freq-monthly">Quarterly</span>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--teal-light);">✅</div>
+          <div class="source-icon" style="background:rgba(201,79,53,0.1);">⚡</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://www.e-verify.gov/employers" target="_blank">E-Verify — Employer Resources</a></div>
-            <div class="source-desc">E-Verify enrollment, compliance, and employer guides</div>
-          </div>
-          <span class="freq-badge freq-monthly">Quarterly</span>
-        </div>
-        <div class="source-row">
-          <div class="source-icon" style="background:var(--amber-light);">🔐</div>
-          <div class="source-info">
-            <div class="source-name"><a href="https://www.ice.gov/i9-inspection" target="_blank">ICE — I-9 Inspection Guidance</a></div>
-            <div class="source-desc">ICE worksite enforcement — audit procedures and employer obligations</div>
-          </div>
-          <span class="freq-badge freq-monthly">Quarterly</span>
-        </div>
-        <div style="margin-top:1rem;">
-          <a href="https://www.uscis.gov/i-9-central" target="_blank" class="pill">I-9 Central →</a>
-          <a href="https://www.e-verify.gov/employers" target="_blank" class="pill" style="margin-top:6px;">E-Verify →</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Global mobility & PERM</div>
-        <div class="source-row">
-          <div class="source-icon" style="background:var(--accent-light);">🌍</div>
-          <div class="source-info">
-            <div class="source-name"><a href="https://www.mobility-exchange.com" target="_blank">Mobility Exchange</a></div>
-            <div class="source-desc">Global mobility intelligence — international assignments, work permits, and relocation</div>
+            <div class="source-name"><a href="https://www.hklaw.com/en/insights/publications?category=artificial-intelligence" target="_blank">Holland & Knight — AI Employment Law</a></div>
+            <div class="source-desc">Federal-state AI law divergence analysis — regularly updated</div>
           </div>
           <span class="freq-badge freq-weekly">Weekly</span>
         </div>
+        <div style="margin-top:1rem;">
+          <a href="https://www.eeoc.gov/artificial-intelligence" target="_blank" class="pill">EEOC AI Page →</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Analyst & research firms</div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--teal-light);">📊</div>
+          <div class="source-icon" style="background:rgba(167,139,250,0.1);">🔬</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://www.dol.gov/agencies/eta/foreign-labor" target="_blank">DOL Foreign Labor Certification</a></div>
-            <div class="source-desc">PERM processing times, prevailing wage, and LCA guidance</div>
+            <div class="source-name"><a href="https://www.gartner.com/en/legal-compliance" target="_blank">Gartner Legal & Compliance</a></div>
+            <div class="source-desc">AI governance frameworks, compliance maturity models</div>
           </div>
-          <span class="freq-badge freq-monthly">Monthly</span>
+          <span class="freq-badge freq-monthly">Quarterly</span>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--amber-light);">📰</div>
+          <div class="source-icon" style="background:rgba(96,165,250,0.1);">📈</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://www.nafsa.org/professional-resources/research-and-stats/trends-us-study-abroad" target="_blank">NAFSA — Workforce & Mobility</a></div>
-            <div class="source-desc">International education and workforce mobility policy research</div>
+            <div class="source-name"><a href="https://www.forrester.com/research/ai-governance/" target="_blank">Forrester — AI Governance</a></div>
+            <div class="source-desc">Enterprise AI risk and governance framework research</div>
           </div>
-          <span class="freq-badge freq-monthly">Monthly</span>
+          <span class="freq-badge freq-monthly">Quarterly</span>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(110,231,183,0.1);">📰</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.hrdefenseblog.com" target="_blank">HR Defense Blog</a></div>
+            <div class="source-desc">Employment law blog focused on AI hiring compliance — highly practical</div>
+          </div>
+          <span class="freq-badge freq-weekly">Weekly</span>
         </div>
         <div style="margin-top:1rem;">
-          <a href="https://www.dol.gov/agencies/eta/foreign-labor" target="_blank" class="pill">DOL Foreign Labor →</a>
+          <a href="https://www.hrdefenseblog.com" target="_blank" class="pill">HR Defense Blog →</a>
         </div>
       </div>
 
@@ -864,18 +896,18 @@
     <!-- LIVE RSS FEED -->
     <div class="live-feed-panel" id="rss-panel">
       <div class="feed-header">
-        <span class="feed-title">Live Headlines — Immigration</span>
+        <span class="feed-title">Live Headlines — Risk & Compliance</span>
         <span class="live-dot">Live</span>
       </div>
       <div class="feed-tabs">
-        <button class="feed-tab active" onclick="loadFeed('uscis', this)">USCIS</button>
-        <button class="feed-tab" onclick="loadFeed('hrdive_imm', this)">HR Dive</button>
-        <button class="feed-tab" onclick="loadFeed('immimpact', this)">Immigration Impact</button>
-        <button class="feed-tab" onclick="loadFeed('fragomen', this)">Fragomen</button>
-        <button class="feed-tab" onclick="loadFeed('visaverge', this)">VisaVerge</button>
+        <button class="feed-tab active" onclick="loadFeed('shrm_law', this)">SHRM Compliance</button>
+        <button class="feed-tab" onclick="loadFeed('hrdive', this)">HR Dive</button>
+        <button class="feed-tab" onclick="loadFeed('iapp', this)">IAPP AI</button>
+        <button class="feed-tab" onclick="loadFeed('ogletree', this)">Ogletree</button>
+        <button class="feed-tab" onclick="loadFeed('littler', this)">Littler</button>
       </div>
       <div class="feed-list" id="feed-list"><div class="feed-loading">Loading latest headlines…</div></div>
-      <div class="feed-footer-note">Updates every time you open the page · Click any headline to read the full article · Not legal advice</div>
+      <div class="feed-footer-note">Updates every time you open the dashboard · Click any headline to read the full article · Not legal advice</div>
     </div>
   </div>
 
@@ -883,65 +915,72 @@
   <div id="checklist" class="section">
     <div class="grid-2">
       <div class="card">
-        <div class="card-title">Critical — act now</div>
+        <div class="card-title">Critical actions — do now</div>
         <div class="checklist-item">
           <span class="check-priority p-critical">CRITICAL</span>
-          <div>
-            <div class="check-title">Audit your H-1B population</div>
-            <div class="check-desc">Map every H-1B employee — their current status, visa stamp expiration, EAD if applicable, and whether they require consular processing for renewal. Identify who is at risk from the new $100K fee and social media vetting requirements before they travel internationally.</div>
+          <div class="check-content">
+            <div class="check-title">Audit your AI tool inventory</div>
+            <div class="check-desc">Identify every tool in your HR and recruiting stack that uses algorithmic processing — ATS ranking, sourcing AI, video interview scoring, scheduling bots, performance analytics. Document whether each vendor classifies their tool as high-risk.</div>
           </div>
         </div>
         <div class="checklist-item">
           <span class="check-priority p-critical">CRITICAL</span>
-          <div>
-            <div class="check-title">Update H-1B financial modeling</div>
-            <div class="check-desc">Incorporate the $100K supplemental fee into hiring budgets for any international H-1B candidates requiring consular processing. Model the financial impact on open requisitions and pipeline candidates before offers are extended. The fee is non-refundable on denial.</div>
+          <div class="check-content">
+            <div class="check-title">Confirm EU AI Act exposure</div>
+            <div class="check-desc">If your company recruits EU candidates, employs EU-based workers, or deploys global HR platforms used by EU teams — you are in scope for the EU AI Act regardless of where your HQ is located. August 2, 2026 deadline.</div>
           </div>
         </div>
         <div class="checklist-item">
           <span class="check-priority p-critical">CRITICAL</span>
-          <div>
-            <div class="check-title">Proactively track all EAD expirations</div>
-            <div class="check-desc">With auto-extension eliminated, employees lose work authorization on the day their EAD expires if a new card hasn't been issued. Build a 6-month advance renewal trigger into your immigration tracking system. Any gap in work authorization creates an I-9 compliance violation.</div>
+          <div class="check-content">
+            <div class="check-title">Establish human-in-the-loop controls</div>
+            <div class="check-desc">Required by California (Oct 2025), EU AI Act, and recommended under EEOC guidance. A qualified person must be able to understand, question, and override AI outputs at all employment decision points.</div>
           </div>
         </div>
         <div class="checklist-item">
           <span class="check-priority p-critical">CRITICAL</span>
-          <div>
-            <div class="check-title">Brief employees on social media vetting</div>
-            <div class="check-desc">All H-1B and H-4 employees who will travel internationally for visa stamping must set social media profiles to public. Brief employees and dependents. Update travel approval process to verify compliance before any international travel that requires visa stamping.</div>
+          <div class="check-content">
+            <div class="check-title">Build notice & disclosure workflows</div>
+            <div class="check-desc">Illinois (Jan 2026) and NYC Local Law 144 require advance notice to candidates when AI influences employment decisions. Colorado (Jun 2026) requires transparency disclosures. Build triggered notice workflows into your ATS or recruiting process.</div>
           </div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">High priority — complete this quarter</div>
+        <div class="card-title">High priority — complete before Q3 2026</div>
         <div class="checklist-item">
           <span class="check-priority p-high">HIGH</span>
-          <div>
-            <div class="check-title">Revise H-1B talent acquisition strategy</div>
-            <div class="check-desc">Wage-weighted lottery (effective Feb 27, 2026) favors higher-paid candidates. Adjust compensation bands for H-1B target roles to maximize selection probability for FY2027 cap season. Evaluate whether entry-level H-1B sponsorship remains viable at your salary ranges.</div>
+          <div class="check-content">
+            <div class="check-title">Conduct bias testing on AI hiring tools</div>
+            <div class="check-desc">Required under California, Colorado, EU AI Act, and NYC Local Law 144. Test AI tools for disparate impact across gender, race, age, and other protected classes. Document results and remediation steps.</div>
           </div>
         </div>
         <div class="checklist-item">
           <span class="check-priority p-high">HIGH</span>
-          <div>
-            <div class="check-title">Verify I-9 documentation accuracy</div>
-            <div class="check-desc">With +48% increase in DOL enforcement via Project Firewall, ensure all I-9 forms are current, correctly completed, and retained per USCIS guidelines. Conduct an internal I-9 audit and remediate any deficiencies before an ICE inspection finds them.</div>
+          <div class="check-content">
+            <div class="check-title">Establish 4-year data retention for ADS records</div>
+            <div class="check-desc">California requires retention of input data, outputs, criteria used, and bias testing results for automated decision systems for a minimum of 4 years. Begin data governance framework now.</div>
           </div>
         </div>
         <div class="checklist-item">
           <span class="check-priority p-high">HIGH</span>
-          <div>
-            <div class="check-title">Review LCA and petition job duty accuracy</div>
-            <div class="check-desc">FDNS site visits verify that petitioned job duties match actual work being performed. Review all active LCAs and H-1B petitions to ensure wage levels, worksites, job descriptions, and supervisory structures reflect current reality — not the role as described at hire.</div>
+          <div class="check-content">
+            <div class="check-title">Review vendor contracts for AI Act compliance</div>
+            <div class="check-desc">Request compliance documentation, bias test reports, and technical files from every HR AI vendor. Ensure contracts define vendor liability for regulatory violations. Under California and EU rules, employers bear responsibility for vendor AI failures.</div>
+          </div>
+        </div>
+        <div class="checklist-item">
+          <span class="check-priority p-high">HIGH</span>
+          <div class="check-content">
+            <div class="check-title">Assign internal AI compliance ownership</div>
+            <div class="check-desc">Designate who owns AI governance in HR — typically a cross-functional role spanning HR, Legal, IT, and People Tech. Define accountability for bias monitoring, human oversight design, and compliance tracking.</div>
           </div>
         </div>
         <div class="checklist-item">
           <span class="check-priority p-medium">MEDIUM</span>
-          <div>
-            <div class="check-title">Build alternative talent pathway strategy</div>
-            <div class="check-desc">Increased H-1B costs and uncertainty create urgency around domestic talent pipelines, university partnerships for OPT hires, Canadian/remote hiring options, and skills-based hiring programs. Begin building these alternatives in parallel with H-1B sponsorship strategy.</div>
+          <div class="check-content">
+            <div class="check-title">Train HR team on AI literacy requirements</div>
+            <div class="check-desc">EU AI Act Article 4 requires AI literacy training for all staff involved in AI operations. Ensure HR team understands how your AI tools work, their limitations, and how to manage them responsibly.</div>
           </div>
         </div>
       </div>
@@ -952,43 +991,43 @@
   <div id="rhythm" class="section">
     <div class="grid-2">
       <div class="card">
-        <div class="card-title">Daily — 5 minutes</div>
+        <div class="card-title">Daily monitoring — 5 min</div>
         <div class="rhythm-row">
           <div class="rhythm-when">Morning</div>
           <div class="rhythm-body">
-            <div class="rhythm-what">Scan VisaVerge + HR Dive Immigration for breaking policy updates</div>
-            <div class="rhythm-src">visaverge.com · hrdive.com/topic/immigration</div>
+            <div class="rhythm-what">Scan HR Dive Employment Law + SHRM Compliance for breaking regulatory news</div>
+            <div class="rhythm-src">hrdive.com/topic/employment-law · shrm.org</div>
           </div>
         </div>
         <div class="rhythm-row">
           <div class="rhythm-when">Alerts</div>
           <div class="rhythm-body">
-            <div class="rhythm-what">Set Google Alerts for: "H-1B 2026", "USCIS update", "EAD work authorization", "Project Firewall"</div>
+            <div class="rhythm-what">Set Google Alerts for: "AI hiring law", "EEOC AI", "Colorado AI Act", "EU AI Act HR"</div>
             <div class="rhythm-src">Free · Google Alerts</div>
           </div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Weekly — 30 minutes</div>
+        <div class="card-title">Weekly — 30 min</div>
         <div class="rhythm-row">
           <div class="rhythm-when">Mon</div>
           <div class="rhythm-body">
-            <div class="rhythm-what">Check Fragomen Insights and The Employer Report for employer-specific immigration guidance</div>
-            <div class="rhythm-src">fragomen.com/insights · theemployerreport.com</div>
+            <div class="rhythm-what">Read one Littler or Ogletree AI employment law brief</div>
+            <div class="rhythm-src">littler.com · ogletree.com/insights</div>
           </div>
         </div>
         <div class="rhythm-row">
           <div class="rhythm-when">Wed</div>
           <div class="rhythm-body">
-            <div class="rhythm-what">Review USCIS Newsroom for official policy updates and processing time changes</div>
-            <div class="rhythm-src">uscis.gov/newsroom</div>
+            <div class="rhythm-what">Check EU AI Act Tracker for new Commission guidance or enforcement updates</div>
+            <div class="rhythm-src">artificialintelligenceact.eu</div>
           </div>
         </div>
         <div class="rhythm-row">
           <div class="rhythm-when">Fri</div>
           <div class="rhythm-body">
-            <div class="rhythm-what">EAD tracker review — check for upcoming expirations in next 6 months and flag for counsel</div>
-            <div class="rhythm-src">Internal immigration tracker</div>
+            <div class="rhythm-what">Review IAPP AI Policy updates for privacy + AI Act intersection issues</div>
+            <div class="rhythm-src">iapp.org/news/topic/artificial-intelligence</div>
           </div>
         </div>
       </div>
@@ -997,106 +1036,43 @@
         <div class="rhythm-row">
           <div class="rhythm-when">Week 1</div>
           <div class="rhythm-body">
-            <div class="rhythm-what">I-9 audit sample — pull 10–15 I-9s at random and verify accuracy and retention compliance</div>
+            <div class="rhythm-what">Review compliance checklist progress — update documentation and audit logs</div>
           </div>
         </div>
         <div class="rhythm-row">
           <div class="rhythm-when">Week 2</div>
           <div class="rhythm-body">
-            <div class="rhythm-what">PERM pipeline review — check DOL processing times and identify any cases at risk of priority date retrogression</div>
-            <div class="rhythm-src">dol.gov/agencies/eta/foreign-labor</div>
+            <div class="rhythm-what">Vendor check — follow up with AI tool providers on compliance documentation and bias test results</div>
           </div>
         </div>
         <div class="rhythm-row">
           <div class="rhythm-when">Week 3</div>
           <div class="rhythm-body">
-            <div class="rhythm-what">H-1B financial impact update — reforecast sponsorship costs for open roles in pipeline</div>
+            <div class="rhythm-what">Read one Gartner or Forrester brief on AI governance frameworks</div>
+            <div class="rhythm-src">gartner.com · forrester.com</div>
           </div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">Key 2026 dates</div>
+        <div class="card-title">Quarterly</div>
         <div class="rhythm-row">
-          <div class="rhythm-when">Feb 27</div>
+          <div class="rhythm-when">Q2 2026</div>
           <div class="rhythm-body">
-            <div class="rhythm-what">Wage-weighted lottery effective — FY2027 H-1B cap registration season begins March 2026</div>
+            <div class="rhythm-what">Colorado AI Act deadline — Jun 30. Final compliance verification for all high-risk AI tools used in employment decisions</div>
           </div>
         </div>
         <div class="rhythm-row">
-          <div class="rhythm-when">Mar 2026</div>
+          <div class="rhythm-when">Q3 2026</div>
           <div class="rhythm-body">
-            <div class="rhythm-what">FY2027 H-1B cap registration window opens — first lottery using new wage-weighted selection</div>
-          </div>
-        </div>
-        <div class="rhythm-row">
-          <div class="rhythm-when">Sep 2026</div>
-          <div class="rhythm-body">
-            <div class="rhythm-what">$100K supplemental fee scheduled to expire — monitor for extension announcement starting Jul 2026</div>
+            <div class="rhythm-what">EU AI Act high-risk system deadline — Aug 2. Full compliance required for any AI affecting EU candidates or employees</div>
           </div>
         </div>
         <div class="rhythm-row">
           <div class="rhythm-when">Ongoing</div>
           <div class="rhythm-body">
-            <div class="rhythm-what">H-1B & L-1 Reform Act — monitor legislative progress; if enacted, annual DHS compliance audits become mandatory</div>
+            <div class="rhythm-what">Annual bias audit cycle — NYC Local Law 144 requires independent annual audits of automated employment decision tools</div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- TAB: VISA QUICK REFERENCE -->
-  <div id="visas" class="section">
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">Common employer-sponsored visa types</div>
-        <div class="visa-card" style="--vc-color:var(--coral); box-shadow:none; border-radius:var(--radius-sm); margin-bottom:8px;">
-          <div class="visa-name" style="font-size:13px;">H-1B — Specialty Occupation</div>
-          <p class="visa-desc" style="font-size:12px; margin-top:4px;">Most common tech visa. Requires bachelor's degree in specialty field. 65K annual cap + 20K for US advanced degrees. 3-year initial, extendable to 6 years. Now subject to $100K fee for new consular petitions and wage-weighted lottery.</p>
-        </div>
-        <div class="visa-card" style="--vc-color:var(--accent); box-shadow:none; border-radius:var(--radius-sm); margin-bottom:8px;">
-          <div class="visa-name" style="font-size:13px;">L-1 — Intracompany Transferee</div>
-          <p class="visa-desc" style="font-size:12px; margin-top:4px;">For multinational transfers — managers (L-1A) and specialized knowledge workers (L-1B). No cap. Requires 1 year employment abroad with same company in past 3 years. L-1B "specialized knowledge" definition tightening under proposed reform legislation.</p>
-        </div>
-        <div class="visa-card" style="--vc-color:var(--teal); box-shadow:none; border-radius:var(--radius-sm); margin-bottom:8px;">
-          <div class="visa-name" style="font-size:13px;">OPT / STEM OPT — F-1 Students</div>
-          <p class="visa-desc" style="font-size:12px; margin-top:4px;">12 months post-graduation work authorization, extendable to 24 additional months for STEM degrees. No employer sponsorship cost. Critical pipeline for tech companies. EAD-based work authorization — subject to new 18-month max validity and no auto-extension.</p>
-        </div>
-        <div class="visa-card" style="--vc-color:var(--green); box-shadow:none; border-radius:var(--radius-sm); margin-bottom:8px;">
-          <div class="visa-name" style="font-size:13px;">TN — NAFTA/USMCA (Canada & Mexico)</div>
-          <p class="visa-desc" style="font-size:12px; margin-top:4px;">Available to Canadian and Mexican citizens in qualifying professional roles (engineers, scientists, accountants). No annual cap, faster processing, no lottery. Increasingly valuable alternative to H-1B for qualifying candidates from Canada and Mexico.</p>
-        </div>
-        <div class="visa-card" style="--vc-color:var(--amber); box-shadow:none; border-radius:var(--radius-sm);">
-          <div class="visa-name" style="font-size:13px;">EB-2 / EB-3 — Employment-Based Green Card</div>
-          <p class="visa-desc" style="font-size:12px; margin-top:4px;">PERM labor certification required for most EB-2/EB-3 cases. Long backlogs for India and China-born applicants (10–50+ years for some categories). EB-1A/EB-1B (extraordinary ability) bypasses PERM. Key retention tool for long-term H-1B holders.</p>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Key resources per visa type</div>
-        <a class="brief-link" href="https://www.uscis.gov/working-in-the-united-states/h-1b-specialty-occupations" target="_blank">
-          <span class="brief-text">USCIS — Official H-1B employer guidance</span><span class="brief-arrow">→</span>
-        </a>
-        <a class="brief-link" href="https://www.dol.gov/agencies/eta/foreign-labor/wages" target="_blank">
-          <span class="brief-text">DOL — Prevailing wage and LCA resources</span><span class="brief-arrow">→</span>
-        </a>
-        <a class="brief-link" href="https://www.uscis.gov/working-in-the-united-states/temporary-workers/l-1a-intracompany-transferee-executive-or-manager" target="_blank">
-          <span class="brief-text">USCIS — L-1 intracompany transferee guidance</span><span class="brief-arrow">→</span>
-        </a>
-        <a class="brief-link" href="https://studyinthestates.dhs.gov/employers/optional-practical-training" target="_blank">
-          <span class="brief-text">DHS — OPT & STEM OPT employer guide</span><span class="brief-arrow">→</span>
-        </a>
-        <a class="brief-link" href="https://www.uscis.gov/i-9-central/form-i-9-resources/handbook-for-employers-m-274" target="_blank">
-          <span class="brief-text">USCIS — I-9 Handbook for Employers (M-274)</span><span class="brief-arrow">→</span>
-        </a>
-        <a class="brief-link" href="https://www.dol.gov/agencies/eta/foreign-labor/perm" target="_blank">
-          <span class="brief-text">DOL — PERM labor certification guidance</span><span class="brief-arrow">→</span>
-        </a>
-        <a class="brief-link" href="https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html" target="_blank">
-          <span class="brief-text">State Dept — Visa wait times by consulate</span><span class="brief-arrow">→</span>
-        </a>
-        <a class="brief-link" href="https://www.uscis.gov/working-in-the-united-states/stem-opt" target="_blank">
-          <span class="brief-text">USCIS — STEM OPT extension requirements</span><span class="brief-arrow">→</span>
-        </a>
       </div>
     </div>
   </div>
@@ -1105,85 +1081,85 @@
   <div id="leaders" class="section">
     <div class="grid-3">
       <div class="card">
-        <div class="card-title">Immigration law firms</div>
+        <div class="card-title">Employment law firms to follow</div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--accent-light); font-size:12px; font-weight:500; color:var(--accent);">FR</div>
+          <div class="source-icon" style="background:rgba(167,139,250,0.1); font-size:12px; font-weight:500; color:#a78bfa;">LT</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://fragomen.com" target="_blank">Fragomen</a></div>
-            <div class="source-desc">World's largest immigration firm — employer global mobility focus</div>
+            <div class="source-name"><a href="https://www.littler.com" target="_blank">Littler Mendelson</a></div>
+            <div class="source-desc">Largest employment law firm — leading AI hiring compliance analysis</div>
           </div>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--teal-light); font-size:12px; font-weight:500; color:var(--teal);">LT</div>
+          <div class="source-icon" style="background:rgba(96,165,250,0.1); font-size:12px; font-weight:500; color:#60a5fa;">OD</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://www.littler.com/practice-areas/immigration" target="_blank">Littler Mendelson</a></div>
-            <div class="source-desc">H-1B, L-1, I-9 employer compliance — largest employment law firm</div>
+            <div class="source-name"><a href="https://ogletree.com" target="_blank">Ogletree Deakins</a></div>
+            <div class="source-desc">Employment law firm — deep state-by-state AI law tracking</div>
           </div>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--amber-light); font-size:12px; font-weight:500; color:var(--amber);">RN</div>
+          <div class="source-icon" style="background:rgba(110,231,183,0.1); font-size:12px; font-weight:500; color:#6ee7b7;">HK</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://www.rnlawgroup.com" target="_blank">Reddy Neumann Brown</a></div>
-            <div class="source-desc">Houston's largest immigration firm — H-1B and employment-based GC focus</div>
+            <div class="source-name"><a href="https://www.hklaw.com" target="_blank">Holland & Knight</a></div>
+            <div class="source-desc">Federal-state AI law divergence and EEOC guidance analysis</div>
           </div>
         </div>
         <div class="source-row">
-          <div class="source-icon" style="background:var(--coral-light); font-size:12px; font-weight:500; color:var(--coral);">GD</div>
+          <div class="source-icon" style="background:rgba(201,79,53,0.1); font-size:12px; font-weight:500; color:var(--coral);">FP</div>
           <div class="source-info">
-            <div class="source-name"><a href="https://www.gibsondunn.com/practice/immigration" target="_blank">Gibson Dunn</a></div>
-            <div class="source-desc">Corporate immigration counsel — executive order and policy analysis</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-title">Government & regulatory bodies</div>
-        <div class="source-row">
-          <div class="source-icon" style="background:var(--accent-light);">🏛️</div>
-          <div class="source-info">
-            <div class="source-name"><a href="https://www.uscis.gov" target="_blank">USCIS</a></div>
-            <div class="source-desc">US Citizenship and Immigration Services — all employer petition processing</div>
-          </div>
-        </div>
-        <div class="source-row">
-          <div class="source-icon" style="background:var(--teal-light);">📋</div>
-          <div class="source-info">
-            <div class="source-name"><a href="https://www.dol.gov/agencies/eta/foreign-labor" target="_blank">DOL — Foreign Labor</a></div>
-            <div class="source-desc">LCA processing, PERM, prevailing wage — H-1B and PERM compliance</div>
-          </div>
-        </div>
-        <div class="source-row">
-          <div class="source-icon" style="background:var(--amber-light);">✈️</div>
-          <div class="source-info">
-            <div class="source-name"><a href="https://travel.state.gov" target="_blank">State Dept — Visas</a></div>
-            <div class="source-desc">Consular processing, visa stamping wait times, and travel advisories</div>
-          </div>
-        </div>
-        <div class="source-row">
-          <div class="source-icon" style="background:var(--coral-light);">🔍</div>
-          <div class="source-info">
-            <div class="source-name"><a href="https://www.ice.gov/worksite-enforcement" target="_blank">ICE — Worksite Enforcement</a></div>
-            <div class="source-desc">I-9 audit procedures, FDNS coordination, and employer debarment</div>
+            <div class="source-name"><a href="https://www.fisherphillips.com/en/news-insights/artificial-intelligence.html" target="_blank">Fisher Phillips — AI</a></div>
+            <div class="source-desc">AI in the workplace legal updates and employer guidance</div>
           </div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title">Key concepts for HR leaders</div>
+        <div class="card-title">Regulatory bodies to monitor</div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(0,102,204,0.1);">🏛️</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.eeoc.gov" target="_blank">EEOC</a></div>
+            <div class="source-desc">Equal Employment Opportunity Commission — Title VII + AI enforcement</div>
+          </div>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(96,165,250,0.1);">🇪🇺</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://digital-strategy.ec.europa.eu/en/policies/european-approach-artificial-intelligence" target="_blank">EU AI Office</a></div>
+            <div class="source-desc">European Commission AI Office — AI Act enforcement coordination</div>
+          </div>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(110,231,183,0.1);">🔒</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://cppa.ca.gov" target="_blank">California CPPA</a></div>
+            <div class="source-desc">California Privacy Protection Agency — ADMT regulations and enforcement</div>
+          </div>
+        </div>
+        <div class="source-row">
+          <div class="source-icon" style="background:rgba(167,139,250,0.1);">⚙️</div>
+          <div class="source-info">
+            <div class="source-name"><a href="https://www.nist.gov/artificial-intelligence" target="_blank">NIST AI RMF</a></div>
+            <div class="source-desc">National Institute of Standards — AI Risk Management Framework</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Key frameworks & concepts</div>
         <div class="rhythm-row" style="padding:10px 0;">
-          <div><div class="rhythm-what" style="font-weight:500;">LCA — Labor Condition Application</div><div class="rhythm-src">Filed with DOL before H-1B petition. Employer attests to prevailing wage, working conditions, and no strike/lockout. Accuracy is critical — FDNS verifies these against actual job duties.</div></div>
+          <div class="rhythm-body"><div class="rhythm-what" style="font-weight:500;">Disparate Impact</div><div class="rhythm-src">When AI produces discriminatory outcomes against protected classes, even without discriminatory intent. Core Title VII risk for AI hiring tools.</div></div>
         </div>
         <div class="rhythm-row" style="padding:10px 0;">
-          <div><div class="rhythm-what" style="font-weight:500;">PERM — Permanent Labor Certification</div><div class="rhythm-src">DOL process required for most employment-based green cards. Requires employer to prove no qualified US workers available. Processing times: 12–24+ months. Critical to start early for H-1B employees approaching 6-year cap.</div></div>
+          <div class="rhythm-body"><div class="rhythm-what" style="font-weight:500;">High-Risk AI Classification</div><div class="rhythm-src">EU AI Act Annex III explicitly classifies all recruitment, screening, selection, and performance AI as high-risk — triggering mandatory compliance obligations.</div></div>
         </div>
         <div class="rhythm-row" style="padding:10px 0;">
-          <div><div class="rhythm-what" style="font-weight:500;">Cap-Exempt H-1B</div><div class="rhythm-src">Universities, nonprofits, and government research organizations are exempt from the 65K cap. Some employers partner with cap-exempt entities to employ workers outside the lottery.</div></div>
+          <div class="rhythm-body"><div class="rhythm-what" style="font-weight:500;">Human-in-the-Loop (HITL)</div><div class="rhythm-src">Required by multiple laws — a qualified person must be able to understand, question, and override AI employment decisions.</div></div>
         </div>
         <div class="rhythm-row" style="padding:10px 0;">
-          <div><div class="rhythm-what" style="font-weight:500;">Priority Date</div><div class="rhythm-src">The date a PERM or I-140 is filed — determines queue position for green card availability. India and China-born applicants face multi-decade backlogs in EB-2/EB-3 categories.</div></div>
+          <div class="rhythm-body"><div class="rhythm-what" style="font-weight:500;">Brussels Effect</div><div class="rhythm-src">EU AI Act expected to set global compliance standard, similar to GDPR. Multinationals will likely apply EU standards globally.</div></div>
         </div>
         <div class="rhythm-row" style="padding:10px 0; border-bottom:none;">
-          <div><div class="rhythm-what" style="font-weight:500;">H-4 EAD</div><div class="rhythm-src">Work authorization for H-1B spouses who are in the green card process. Subject to same EAD auto-extension elimination. Track separately — H-4 EAD holders losing work authorization mid-project is a significant operational risk.</div></div>
+          <div class="rhythm-body"><div class="rhythm-what" style="font-weight:500;">Deployer vs Provider Liability</div><div class="rhythm-src">Both tool vendors (providers) and the employers who use them (deployers) face liability under EU AI Act and US state laws. Vendor contracts must define accountability.</div></div>
         </div>
       </div>
     </div>
@@ -1193,12 +1169,11 @@
 </main>
 
 <!-- FOOTER -->
-<footer class="site-footer">
+<footer>
   <div class="footer-inner">
-    <div class="footer-left">The Signal · Immigration · <span id="footer-date"></span> &middot; &copy; 2026 The Signal HR &middot; Alex Rivera. Content may be shared with attribution.</div>
+    <div class="footer-left">The Signal · Risk & Compliance · <span id="footer-date"></span> &middot; &copy; 2026 The Signal HR &middot; Alex Rivera. Content may be shared with attribution.</div>
     <div class="footer-right">
       <a href="https://agentforchange-hr-tech.github.io/the-signal" class="footer-link">← Back to The Signal</a>
-      <a href="https://agentforchange-hr-tech.github.io/agentforchange-risk/" class="footer-link">Risk & Compliance →</a>
       <a href="https://agentforchange-hr-tech.github.io/hr-tech-intel/" class="footer-link">Talent Acquisition →</a>
       <a href="https://agentforchange-hr-tech.github.io/agentforchange-careers/" target="_blank" class="footer-link">Career Pathways &rarr;</a>
       <a href="https://agentforchange-hr-tech.github.io/agentforchange-compare/" target="_blank" class="footer-link">Comparison Hub &rarr;</a>
@@ -1207,23 +1182,24 @@
   </div>
 </footer>
 
+</div><!-- /site-wrap -->
+
 <script>
-  /* ── DATES ── */
+  /* ── DATE ── */
   const now = new Date();
-  const full = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
-  const short = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  document.getElementById('live-date').textContent = 'Updated ' + full;
-  document.getElementById('footer-date').textContent = full;
-  document.getElementById('hero-date').textContent = short;
-  document.getElementById('policy-date').textContent = short;
+  const dateStr = now.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  const shortDate = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  document.getElementById('hero-date').textContent = shortDate;
+  document.getElementById('footer-date').textContent = dateStr;
+  document.getElementById('reg-date').textContent = shortDate;
 
   /* ── DARK MODE ── */
   function toggleDark() {
     const isDark = document.body.classList.toggle('dark');
     document.getElementById('dark-toggle').textContent = isDark ? 'Light' : 'Dark';
-    localStorage.setItem('signal-imm-theme', isDark ? 'dark' : 'light');
+    localStorage.setItem('signal-rc-theme', isDark ? 'dark' : 'light');
   }
-  if (localStorage.getItem('signal-imm-theme') === 'dark') {
+  if (localStorage.getItem('signal-rc-theme') === 'dark') {
     document.body.classList.add('dark');
     document.getElementById('dark-toggle').textContent = 'Light';
   }
@@ -1246,42 +1222,35 @@
     btn.classList.add('active');
   }
 
-  /* ── SEARCH ── */
+  /* ── SEARCH INDEX ── */
   const SEARCH_INDEX = [
-    { title: '$100K H-1B Supplemental Fee', desc: 'Active Sep 21, 2025 — consular processing petitions', type: 'Policy', url: 'https://www.uscis.gov' },
-    { title: 'Wage-Weighted H-1B Lottery', desc: 'Effective Feb 27, 2026 — FY2027 cap season', type: 'Policy', url: 'https://www.uscis.gov' },
-    { title: 'EAD Auto-Extension Eliminated', desc: 'Active Oct 30, 2025 — 18mo max validity', type: 'Policy', url: 'https://www.uscis.gov' },
-    { title: 'Social Media Vetting H-1B', desc: 'All H-1B/H-4 applicants — active Dec 15, 2025', type: 'Policy', url: 'https://www.uscis.gov' },
-    { title: 'Project Firewall', desc: '+48% DOL probes — expanded FDNS enforcement', type: 'Policy', url: 'https://www.dol.gov' },
-    { title: 'H-1B & L-1 Reform Act 2025', desc: 'Proposed legislation — annual DHS audits, increased penalties', type: 'Policy', url: null },
-    { title: 'H-1B', desc: 'Specialty occupation visa — 65K cap, $100K fee, wage-weighted lottery', type: 'Visa', url: 'https://www.uscis.gov/working-in-the-united-states/h-1b-specialty-occupations' },
-    { title: 'L-1', desc: 'Intracompany transferee — L-1A managers, L-1B specialized knowledge', type: 'Visa', url: 'https://www.uscis.gov' },
-    { title: 'OPT / STEM OPT', desc: 'F-1 student work authorization — 12mo + 24mo STEM extension', type: 'Visa', url: 'https://studyinthestates.dhs.gov' },
-    { title: 'TN Visa', desc: 'Canada/Mexico USMCA visa — no cap, fast processing', type: 'Visa', url: null },
-    { title: 'EB-2 / EB-3 Green Card', desc: 'PERM-based employment green card — long India/China backlogs', type: 'Visa', url: 'https://www.dol.gov/agencies/eta/foreign-labor/perm' },
-    { title: 'Fragomen', desc: 'World\'s largest immigration firm — global mobility focus', type: 'Source', url: 'https://fragomen.com/insights' },
-    { title: 'USCIS Newsroom', desc: 'Official USCIS policy updates and announcements', type: 'Source', url: 'https://www.uscis.gov/newsroom' },
-    { title: 'Littler Immigration', desc: 'H-1B, L-1, I-9 employer compliance', type: 'Source', url: 'https://www.littler.com/practice-areas/immigration' },
-    { title: 'VisaVerge', desc: 'Breaking immigration news and H-1B trends', type: 'Source', url: 'https://www.visaverge.com' },
-    { title: 'LCA', desc: 'Labor Condition Application — filed with DOL before H-1B petition', type: 'Concept', url: null },
-    { title: 'PERM', desc: 'Permanent labor certification — required for most employment-based green cards', type: 'Concept', url: null },
-    { title: 'Priority Date', desc: 'Queue position for green card availability — India/China multi-decade backlog', type: 'Concept', url: null },
-    { title: 'H-4 EAD', desc: 'Work authorization for H-1B spouses — track expirations separately', type: 'Concept', url: null },
-    { title: 'Cap-Exempt H-1B', desc: 'Universities and nonprofits exempt from 65K annual cap', type: 'Concept', url: null },
-    { title: 'FDNS', desc: 'Fraud Detection and National Security — site visit enforcement arm', type: 'Concept', url: null },
-    { title: 'I-9', desc: 'Employment eligibility verification — required for all new hires', type: 'Compliance', url: 'https://www.uscis.gov/i-9-central' },
-    { title: 'E-Verify', desc: 'Electronic employment eligibility verification system', type: 'Compliance', url: 'https://www.e-verify.gov/employers' },
+    { title: 'California ADS Regulations', desc: 'Effective Oct 2025 — automated decision systems in employment', type: 'Regulation', url: 'https://calcivilrights.ca.gov' },
+    { title: 'Illinois HB 3773', desc: 'AI in employment decisions — effective Jan 1, 2026', type: 'Regulation', url: 'https://www.ilga.gov' },
+    { title: 'Colorado AI Act (SB 24-205)', desc: 'High-risk AI compliance deadline Jun 30, 2026', type: 'Regulation', url: 'https://coag.gov/ai' },
+    { title: 'Texas TRAIGA', desc: 'Responsible AI Governance Act — effective Jan 1, 2026', type: 'Regulation', url: 'https://capitol.texas.gov' },
+    { title: 'NYC Local Law 144', desc: 'Annual bias audit required for automated employment decision tools', type: 'Regulation', url: 'https://www.nyc.gov' },
+    { title: 'EU AI Act', desc: 'High-risk HR system compliance deadline Aug 2, 2026', type: 'Regulation', url: 'https://artificialintelligenceact.eu' },
+    { title: 'SHRM Compliance', desc: 'HR-focused legal updates and AI compliance guidance', type: 'Source', url: 'https://www.shrm.org/topics-tools/topics/employment-law-compliance' },
+    { title: 'HR Dive Employment Law', desc: 'Breaking state and federal AI hiring law coverage', type: 'Source', url: 'https://www.hrdive.com/topic/employment-law/' },
+    { title: 'Littler — Workplace Policy', desc: 'Top employment law firm — AI regulation analysis', type: 'Source', url: 'https://www.littler.com' },
+    { title: 'Ogletree Deakins Blog', desc: 'Deep AI hiring compliance briefs', type: 'Source', url: 'https://ogletree.com/insights-resources/blog-posts/' },
+    { title: 'EU AI Act Tracker', desc: 'Independent tracker for EU AI Act developments and timelines', type: 'Source', url: 'https://artificialintelligenceact.eu' },
+    { title: 'IAPP AI Policy', desc: 'Privacy + AI Act intersection analysis', type: 'Source', url: 'https://iapp.org/news/topic/artificial-intelligence/' },
+    { title: 'NIST AI Risk Management Framework', desc: 'Map, Measure, Manage, Govern — US federal AI governance', type: 'Framework', url: 'https://www.nist.gov/artificial-intelligence' },
+    { title: 'Disparate Impact', desc: 'AI discrimination risk — core Title VII exposure for hiring tools', type: 'Concept', url: null },
+    { title: 'High-Risk AI Classification', desc: 'EU AI Act Annex III — all recruitment AI is high-risk', type: 'Concept', url: null },
+    { title: 'Human-in-the-Loop', desc: 'Required by multiple laws — human oversight and override capability', type: 'Concept', url: null },
+    { title: 'Brussels Effect', desc: 'EU AI Act expected to set global compliance standard like GDPR', type: 'Concept', url: null },
+    { title: 'Deployer vs Provider Liability', desc: 'Both vendors and employers face liability under AI laws', type: 'Concept', url: null },
+    { title: 'Bias Audit', desc: 'Independent annual audit required by NYC Local Law 144', type: 'Concept', url: null },
+    { title: 'EEOC', desc: 'Equal Employment Opportunity Commission — Title VII + AI enforcement', type: 'Regulator', url: 'https://www.eeoc.gov' },
   ];
 
   function runSearch(q) {
     const el = document.getElementById('search-results');
     if (!q || q.length < 2) { el.classList.remove('visible'); return; }
     const lower = q.toLowerCase();
-    const hits = SEARCH_INDEX.filter(i =>
-      i.title.toLowerCase().includes(lower) ||
-      i.desc.toLowerCase().includes(lower) ||
-      i.type.toLowerCase().includes(lower)
-    ).slice(0, 8);
+    const hits = SEARCH_INDEX.filter(i => i.title.toLowerCase().includes(lower) || i.desc.toLowerCase().includes(lower) || i.type.toLowerCase().includes(lower)).slice(0, 8);
     if (!hits.length) {
       el.innerHTML = `<div class="search-empty">No results for "${q}"</div>`;
     } else {
@@ -1298,11 +1267,11 @@
 
   /* ── RSS FEEDS ── */
   const RSS_FEEDS = {
-    uscis:       { url: 'https://www.uscis.gov/feeds/allnews.xml', label: 'USCIS' },
-    hrdive_imm:  { url: 'https://www.hrdive.com/feeds/news/', label: 'HR Dive' },
-    immimpact:   { url: 'https://immigrationimpact.com/feed/', label: 'Immigration Impact' },
-    fragomen:    { url: 'https://fragomen.com/feed/', label: 'Fragomen' },
-    visaverge:   { url: 'https://www.visaverge.com/feed/', label: 'VisaVerge' },
+    shrm_law:  { url: 'https://www.shrm.org/rss/pages/rss.aspx?category=compliance', label: 'SHRM Compliance' },
+    hrdive:    { url: 'https://www.hrdive.com/feeds/news/', label: 'HR Dive' },
+    iapp:      { url: 'https://iapp.org/news/rss/', label: 'IAPP AI Policy' },
+    ogletree:  { url: 'https://ogletree.com/rss/', label: 'Ogletree Deakins' },
+    littler:   { url: 'https://www.littler.com/publication-press/rss.xml', label: 'Littler' },
   };
 
   function formatDate(d) {
@@ -1339,8 +1308,9 @@
     fetchFeed(key, 'feed-list');
   }
 
+  /* ── INIT ── */
   window.addEventListener('DOMContentLoaded', () => {
-    fetchFeed('uscis', 'feed-list');
+    fetchFeed('shrm_law', 'feed-list');
   });
 </script>
 </body>
