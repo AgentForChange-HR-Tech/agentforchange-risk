@@ -367,6 +367,39 @@
 
 
   
+
+  /* ── SIGNAL ALERT BANNER ── */
+  .signal-alert-banner {
+    display: none; /* Activated by SIGNAL_ALERT_ACTIVE = true in JS */
+    background: var(--coral-light, #fdecea);
+    border-bottom: 2px solid var(--coral, #c94f35);
+    padding: 0.75rem 2rem;
+    position: relative;
+    z-index: 99;
+  }
+  body.dark .signal-alert-banner {
+    background: rgba(201,79,53,0.12);
+  }
+  .signal-alert-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  }
+  .signal-alert-content {
+    display: flex; align-items: center; gap: 10px; flex: 1;
+  }
+  .signal-alert-dot {
+    font-size: 14px; flex-shrink: 0;
+  }
+  .signal-alert-text {
+    font-size: 13px; color: var(--coral, #c94f35); font-weight: 500; line-height: 1.4;
+  }
+  .signal-alert-link {
+    font-size: 12px; color: var(--coral, #c94f35); text-decoration: underline; white-space: nowrap; flex-shrink: 0;
+  }
+  .signal-alert-dismiss {
+    background: none; border: none; cursor: pointer; color: var(--coral, #c94f35);
+    font-size: 16px; padding: 0 4px; flex-shrink: 0;
+  }
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .nav-links { display: none; }
@@ -378,7 +411,112 @@
     .tab-btn { font-size: 12px; padding: 6px 10px; }
     .stat-strip { grid-template-columns: repeat(2, 1fr); }
   }
+
+  /* ── DESIGN REFRESH v2 — typography, contrast, mobile ── */
+  /* Increased font sizes for 35-60 age range readability */
+  .source-desc, .insight-desc, .platform-desc, .visa-desc, .trend-desc, .check-desc, .framework-desc {
+    font-size: 14px !important;
+    line-height: 1.75 !important;
+    color: var(--ink-mid) !important;
+  }
+  .source-name, .insight-name, .platform-name, .visa-name, .trend-name, .check-title, .framework-name, .rhythm-what {
+    font-size: 14px !important;
+  }
+  .card-title, .feed-title, .stat-label, .hero-breadcrumb, .rhythm-when {
+    font-size: 12px !important;
+  }
+  .stat-sub, .feed-item-date, .feed-item-source, .feed-footer-note, .reviewed-notice {
+    font-size: 12px !important;
+    color: var(--ink-soft) !important;
+  }
+  .brief-text { font-size: 14px !important; }
+  .brief-link, .rhythm-row { line-height: 1.75 !important; }
+  .card { padding: 1.5rem 1.75rem !important; }
+  /* Mobile tap targets */
+  @media (max-width: 768px) {
+    .tab-btn { min-height: 44px !important; padding: 10px 14px !important; font-size: 13px !important; }
+    .feed-tab { min-height: 36px !important; padding: 8px 12px !important; }
+    .hdr-btn { min-height: 36px !important; }
+    .pill { min-height: 36px !important; padding: 8px 14px !important; }
+    .site-header { padding: 0 1rem !important; }
+    .header-title .subtitle { display: none !important; }
+    .tab-bar { overflow-x: auto !important; flex-wrap: nowrap !important; -webkit-overflow-scrolling: touch !important; padding-bottom: 5px !important; }
+    .tab-bar::-webkit-scrollbar { height: 2px !important; }
+    .page-hero { padding: 2rem 1.25rem 1.5rem !important; }
+    .page-hero h1 { font-size: clamp(1.75rem, 6vw, 2.5rem) !important; }
+    .main { padding: 1rem 1rem 2rem !important; }
+    .stat-strip { grid-template-columns: repeat(2, 1fr) !important; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr !important; }
+    .header-inner { padding: 0.75rem 0 !important; }
+    .urgency-items { display: none !important; }
+  }
+  @media (max-width: 480px) {
+    .hero-meta { gap: 6px !important; }
+    .meta-chip { font-size: 10px !important; padding: 3px 8px !important; }
+    .stat-val { font-size: 1.6rem !important; }
+  }
+
+  /* ── NEWSLETTER CTA ── */
+  .newsletter-cta {
+    display: flex;
+    align-items: center; justify-content: space-between;
+    gap: 1.5rem; flex-wrap: wrap;
+    background: var(--accent-light, #e8f0fb);
+    border: 1px solid rgba(0,102,204,0.2);
+    border-radius: var(--radius, 10px);
+    padding: 1.25rem 1.5rem; margin-top: 16px;
+  }
+  .cta-text h3 { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+  .cta-text p { font-size: 13px; color: var(--ink-soft); }
+  .cta-btn {
+    font-size: 13px; font-weight: 500; padding: 9px 22px;
+    border-radius: 22px; background: var(--accent, #0066cc); color: white;
+    text-decoration: none; white-space: nowrap; transition: all 0.15s;
+    border: none; cursor: pointer; flex-shrink: 0;
+  }
+  .cta-btn:hover { background: var(--accent-mid, #4d94e0); transform: translateY(-1px); box-shadow: 0 4px 12px rgba(0,102,204,0.25); }
+  .footer-cta {
+    font-size: 13px; color: var(--ink-soft); text-align: center;
+    padding-top: 0.75rem; border-top: 1px solid var(--border); margin-top: 0.75rem;
+  }
+  .footer-cta a { color: var(--accent); text-decoration: none; font-weight: 500; }
+  .footer-cta a:hover { text-decoration: underline; }
+  .meta-cta-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; padding: 4px 12px; border-radius: 12px;
+    background: rgba(255,255,255,0.15); color: #fff;
+    border: 1px solid rgba(255,255,255,0.3); text-decoration: none;
+    transition: background 0.15s;
+  }
+  .meta-cta-chip:hover { background: rgba(255,255,255,0.25); }
 </style>
+
+  <!-- Google Analytics 4 — replace G-MGQ5MSQM2W with your real GA4 Measurement ID -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MGQ5MSQM2W"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-MGQ5MSQM2W', {
+      page_title: document.title,
+      page_location: window.location.href
+    });
+    // Track tab clicks
+    document.addEventListener('click', function(e) {
+      if (e.target.classList.contains('tab-btn')) {
+        gtag('event', 'tab_click', {event_category: 'engagement', event_label: e.target.textContent.trim()});
+      }
+      if (e.target.id === 'share-btn' || e.target.closest('#share-btn')) {
+        gtag('event', 'share_click', {event_category: 'engagement', event_label: window.location.pathname});
+      }
+      if (e.target.classList.contains('feed-tab')) {
+        gtag('event', 'feed_tab_click', {event_category: 'engagement', event_label: e.target.textContent.trim()});
+      }
+      if (e.target.closest('.cta-btn') || e.target.classList.contains('cta-btn')) {
+        gtag('event', 'substack_cta_click', {event_category: 'conversion', event_label: window.location.pathname});
+      }
+    });
+  </script>
 </head>
 <body>
 
@@ -1031,12 +1169,13 @@
     </div>
   </div>
 
+<div style="background:var(--accent-light);border:1px solid rgba(0,102,204,0.2);border-radius:var(--radius);padding:1.25rem 1.5rem;margin:1.5rem 0;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;"><div><div style="font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px;">Stay current with The Signal HR</div><div style="font-size:13px;color:var(--ink-soft);">Weekly intelligence on HR tech, agentic AI, and workforce strategy.</div></div><a href="https://thesignalhr.substack.com/" target="_blank" style="font-size:13px;font-weight:500;padding:9px 22px;border-radius:22px;background:var(--accent);color:white;text-decoration:none;white-space:nowrap;flex-shrink:0;">Subscribe free</a></div>
 </main>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-left">The Signal · Risk & Compliance · <span id="footer-date"></span></div>
+    <div class="footer-left">The Signal · Risk & Compliance · <span id="footer-date"></span> &middot; &copy; 2026 The Signal HR &middot; Alex Rivera. Content may be shared with attribution.</div>
     <div class="footer-right">
       <a href="https://agentforchange-hr-tech.github.io/the-signal" class="footer-link">← Back to The Signal</a>
       <a href="https://agentforchange-hr-tech.github.io/hr-tech-intel/" class="footer-link">Talent Acquisition →</a>
